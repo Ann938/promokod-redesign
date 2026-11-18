@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Промокоды, акции и скидки — Пикабу Промокоды</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="icon" href="img/logo-icon.svg">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="home">
+<div class="info">Сервис создан, поддерживается и контролируется командой Пикабу.<a href="#">Подробнее</a></div>
+<header class="hd" id="hd"></header>
+
+<main class="wrap">
+  <!-- первый экран: заголовок + акцентный поиск (поиск — главное действие) -->
+  <section class="hero">
+    <div class="hero__top">
+      <div>
+        <h1>Промокоды, акции и скидки <em>для онлайн-покупок</em></h1>
+        <p>Проверенные купоны 1 200+ магазинов. Обновляем каждый день.</p>
+        <form class="search" id="sform" role="search">
+          <label><svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" type="search" placeholder="Найдите магазин: Ozon, Lamoda, Ситилинк…" aria-label="Название магазина"></label>
+          <button class="btn btn--primary btn--l" type="submit">Найти</button>
+        </form>
+        <div class="chips">Ищут сейчас:
+          <button class="chip" type="button" data-q="Lamoda">Lamoda</button>
+          <button class="chip" type="button" data-q="AliExpress">AliExpress</button>
+          <button class="chip" type="button" data-q="Ситилинк">Ситилинк</button>
+          <button class="chip" type="button" data-q="Яндекс Практикум">Яндекс Практикум</button>
+          <button class="chip" type="button" data-q="Эльдорадо">Эльдорадо</button>
+        </div>
+        <div class="stats"><span><b>12 480</b>активных купонов</span><span><b>1 230</b>магазинов</span><span><b>+86</b>новых сегодня</span></div>
+      </div>
+      <div class="hero__art"><img src="img/ban/mascot.png" alt=""></div>
+    </div>
+    <div class="brands" id="brands"></div>
+  </section>
+
+  <section class="block slider" aria-label="Акции партнёров">
+    <button class="arr arr--l" id="sl" type="button" aria-label="Назад"><svg class="ic" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"/></svg></button>
+    <div class="row" id="slides">
+      <a class="slide" href="#"><img src="img/ban/sunlight.jpg" alt="Sunlight: выгода 3000 ₽ на первый заказ"></a>
+      <a class="slide slide--s" href="#"><img src="img/ban/otello.jpg" alt="Отелло: скидки на отели"></a>
+      <a class="slide" href="#"><img src="img/ban/yatravel.jpg" alt="Яндекс Путешествия: скидка 1000 ₽"></a>
+      <a class="slide slide--s" href="#"><img src="img/ban/ali.jpg" alt="AliExpress: дни выгоды"></a>
+    </div>
+    <button class="arr arr--r" id="sr" type="button" aria-label="Вперёд"><svg class="ic" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></button>
+    <div class="dots" id="dots"></div>
+  </section>
+
+  <!-- эксклюзивные — сразу купонами (из комментария в макете) -->
+  <section class="block excl">
+    <img class="excl__mascot" src="img/ban/mascot.png" alt="">
+    <div class="excl__head">
+      <div><h2>Эксклюзивные промокоды<br><span>от команды Пикабу</span></h2>
+      <p>Собрали полезные и актуальные предложения для пикабушников — таких нет на других сайтах.</p></div>
+    </div>
+    <div class="row" id="excl"></div>
+  </section>
+
+  <section class="block">
+    <div class="block__h"><h2>Популярные магазины</h2><a class="go" href="#">Все магазины <svg class="ic" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></a></div>
+    <div class="stores" id="stores"></div>
+  </section>
+
+  <!-- три одинаковые карусели собраны в один блок с вкладками -->
+  <section class="block">
+    <div class="block__h"><h2>Промокоды</h2><div class="tabs" id="ptabs" role="tablist" aria-label="Подборка промокодов"></div><span class="tools"><a class="go" href="#">Все промокоды <svg class="ic" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></a></span></div>
+    <div class="grid4" id="pgrid" role="tabpanel"></div>
+  </section>
+
+  <section class="block">
+    <div class="block__h"><h2>Интересные магазины</h2><a class="go" href="#">Все магазины <svg class="ic" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></a></div>
+    <div class="shops" id="shops"></div>
+  </section>
+
+  <section class="block">
+    <div class="block__h"><h2>Все категории скидок</h2><span class="count">28 категорий</span></div>
+    <div class="cats" id="cats"></div>
+  </section>
+
+  <section class="block">
+    <div class="block__h"><h2>Популярные статьи</h2><a class="go" href="#">Блог <svg class="ic" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></a></div>
+    <div class="arts">
+      <a class="art" href="#"><img src="img/art/a1.jpg" alt=""><div><small>Подарки · 5 мин</small><b>Подарки с теплом: уютные и практичные новогодние сюрпризы</b></div></a>
+      <a class="art" href="#"><img src="img/art/a2.jpg" alt=""><div><small>Учёба · 7 мин</small><b>Как эффективно готовиться к экзаменам: лучшие советы для школьников</b></div></a>
+      <a class="art" href="#"><img src="img/art/a3.jpg" alt=""><div><small>Покупки · 4 мин</small><b>Как не переплатить в сезон распродаж: чек-лист</b></div></a>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block__h"><h2>Часто задаваемые вопросы</h2></div>
+    <div class="faq">
+      <details class="qa card" open><summary>Как работает раздел «Промокоды» на Пикабу?<svg class="ic" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Промокод — это специальная комбинация символов, скрывающая в себе скидку на конкретный перечень товаров. Магазины и сервисы предоставляют их, чтобы привлечь новых клиентов и стимулировать их к покупке. Мы собираем самые свежие и выгодные промокоды для топовых интернет-магазинов и проверяем их перед публикацией.</p></details>
+      <details class="qa card"><summary>Как получить скидку?<svg class="ic" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Нажмите «Показать промокод», скопируйте его и вставьте в корзине магазина при оформлении заказа.</p></details>
+      <details class="qa card"><summary>В чём интерес Пикабу и почему промокоды бесплатны?<svg class="ic" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Магазины платят нам за привлечённых покупателей, поэтому для вас промокоды всегда бесплатны.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer class="ft" id="ft"></footer>
+
+<div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="mtitle">
+  <div class="modal__box">
+    <button class="modal__x" id="mx" type="button" aria-label="Закрыть"><svg class="ic" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <div class="modal__logo" id="mlogo"></div>
+    <h3 id="mtitle">Промокод</h3>
+    <div class="code"><b id="mcode">PIKABU</b><button class="btn btn--primary" id="mcopy" type="button">Скопировать</button></div>
+    <small>Вставьте промокод в корзине при оформлении заказа</small>
+    <a class="btn btn--outline btn--l" href="#">Перейти в магазин</a>
+  </div>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
