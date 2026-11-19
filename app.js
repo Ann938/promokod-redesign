@@ -142,7 +142,7 @@
   function cu(c) {
     if (c.goods) return goods();
     if (c.best) return best();
-    const v = V === "v0" ? `<div class="cu__v">${prodValue(c)}</div>` : `<div class="cu__v cu__v--sq">${square(c)}</div>`;
+    const v = V === "v0" ? `<div class="cu__v cu__v--prod${c.ty === "logo" ? " is-logo" : ""}">${prodValue(c)}</div>` : `<div class="cu__v cu__v--sq">${square(c)}</div>`;
     const meta = c.m ? `<span class="msg">${c.m}</span>`
       : `<span class="when">${mi("clock")}${c.d || "До 30 июн. 2026"}</span>${c.exp ? "" : `<span>${mi("check")}Проверено</span>`}<span>${mi("eye")}${c.seen || 3669} раз</span>`;
     const btn = c.sub ? `<button class="btn btn--l btn--orange" type="button" data-code>Забрать по подписке</button><span class="cu__sub">Подписка 199 ₽/мес</span>`

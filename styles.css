@@ -384,3 +384,10 @@ body[data-page="store"] { padding-bottom: 72px; }
 .cu__v img.sq { max-width: none; max-height: none; width: 72px; height: 72px; margin: 0; }
 .tag--cash { background: #fff3eb; color: #f28f49; }
 @media (max-width: 767px) { .vbar { justify-content: space-between; } .vbar button { padding: 0 8px; font-size: 13px; height: 34px; } }
+
+/* «как на проде»: значение в сером квадрате 72×72 (#f7f8fc), логотип — на светлом */
+body[data-v="v0"] .cu { grid-template-columns: 72px minmax(0, 1fr) auto; padding-left: 24px; }
+.cu__v--prod { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 8px; background: #f7f8fc; font-size: 18px; line-height: 24px; font-weight: 700; color: var(--accent); white-space: nowrap; }
+.cu__v--prod.is-logo { background: #fcfdff; }
+.cu__v--prod img { max-width: 64px; max-height: 64px; }
+@media (max-width: 767px) { .cu__v--prod { font-size: 15px; } }
