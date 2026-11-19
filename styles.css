@@ -529,3 +529,15 @@ body[data-v="v0"] .cu { grid-template-columns: 72px minmax(0, 1fr) auto; padding
 .sb__list--ic img { width: 40px; height: 40px; margin: -8px -4px -8px -8px; }
 .cu--exp .sq, .cu--exp .cu__v { opacity: .75; }
 .cu--exp .cu__t { color: var(--muted); }
+/* ===== по макету: у блоков нет теней, только обводка 1px #ebedf2 ===== */
+body[data-page="store"] .card, body[data-page="store"] .good, body[data-page="store"] .tags a { box-shadow: none; border: 1px solid #ebedf2; }
+body[data-page="store"] .lift:hover, body[data-page="store"] .card.lift:hover { box-shadow: none; border-color: #d5d8e0; }
+body[data-page="store"] .cu--sub { border: 2px solid #7cc9b0; box-shadow: none; }
+body[data-page="store"] .goods { border: 0; }
+body[data-page="store"] .cu { padding-top: 24px; padding-bottom: 24px; }
+/* бейджи купона: от левого края контента (24px), прижаты к верху, скругление только снизу */
+.cu__badge { left: 24px; top: 0; height: 20px; padding: 2px 8px; border-radius: 0 0 8px 8px; font-size: 12px; line-height: 16px; }
+body[data-page="store"] .cu--sub .cu__badge { top: -1px; left: 23px; }
+/* бейдж товара: 16px от края, наполовину над карточкой, скругление со всех сторон */
+.good .badge { left: 16px; top: -10px; height: 20px; padding: 2px 8px; border-radius: 8px; line-height: 16px; }
+@media (max-width: 767px) { .cu__badge { left: 16px; } body[data-page="store"] .cu { padding-top: 28px; padding-bottom: 16px; } }
