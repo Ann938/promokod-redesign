@@ -154,7 +154,7 @@
     if (c.goods) return goods();
     if (c.best) return best();
     const v = V === "v0" ? `<div class="cu__v cu__v--prod${c.ty === "logo" ? " is-logo" : ""}">${prodValue(c)}</div>` : `<div class="cu__v cu__v--sq">${square(c)}</div>`;
-    const meta = c.m ? `<span class="msg">${c.m}</span>`
+    const meta = c.m ? `<span class="msg"><span class="msg__t">${c.m}</span><button class="msg__x" type="button" data-more aria-label="Показать текст полностью" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.62 15.73l4.73-4.71a.83.83 0 0 0 0-1.18.85.85 0 0 0-1.18 0l-4.19 4.12-4.15-4.12a.85.85 0 0 0-1.18 0 .83.83 0 0 0 0 1.18l4.73 4.71a.83.83 0 0 0 1.24 0Z"/></svg></button></span>`
       : `<span class="when">${mi("clock")}${c.d || "До 30 июн. 2026"}</span>${c.exp ? "" : `<span>${mi("check")}Проверено</span>`}<span>${mi("eye")}${c.seen || 3669} раз</span>`;
     const btn = c.sub ? `<button class="btn btn--l btn--orange" type="button" data-code>Забрать по подписке</button><span class="cu__sub">Подписка 199 ₽/мес</span>`
       : `<button class="btn btn--l ${c.act ? "btn--outline" : "btn--primary"}" type="button" data-code>${c.act ? "Открыть акцию" + mi("ext") : "Показать промокод"}</button>${c.act ? "" : `<button class="cu__cond" type="button" data-cond>Условия${mi("chev")}</button>`}`;
@@ -170,7 +170,7 @@
   }
   // список купонов — по варианту 1 из макета (427:43509)
   const CU = [
-    { k: "sub", b: "По подписке", ty: "val", val: "1 500 ₽", t: "Скидка <em>1500 рублей</em> для ВСЕХ клиентов при покупке от 15000 рублей", m: "Можно комбинировать с купоном, который применяется автоматически", sub: 1 },
+    { k: "sub", b: "По подписке", ty: "val", val: "1 500 ₽", t: "Скидка <em>1500 рублей</em> для ВСЕХ клиентов при покупке от 15000 рублей", m: "Можно комбинировать с купоном, который применяется автоматически. Действует на все товары магазина, кроме уценённых и подарочных сертификатов.", sub: 1 },
     { k: "pop", b: "Популярный промокод", ty: "cash", t: "Кешбэк 5% при покупке инструментов и техники" },
     { k: "excl", b: "Эксклюзивный промокод", ty: "logo", logo: "onlinetrade", t: "300 ON-бонусов в подарок по промокоду при регистрации на «Онлайн трейд.ру»" },
     { ty: "sale", t: "Офисный пакет Р7-Офис и антивирус Касперского за 4789 рублей", f: "sale" },
@@ -219,6 +219,7 @@
     draw();
     $("#filters").addEventListener("click", (e) => { const b = e.target.closest(".f"); if (!b) return; $$(".f").forEach((x) => x.classList.toggle("on", x === b)); filter = b.dataset.f; draw(); });
     document.addEventListener("click", (e) => { const c = e.target.closest("[data-cond]"); if (c) c.closest(".cu").classList.toggle("open"); });
+    document.addEventListener("click", (e) => { const b = e.target.closest("[data-more]"); if (!b) return; const on = b.closest(".msg").classList.toggle("is-open"); b.setAttribute("aria-expanded", on); });
     const PS = [["ymarket", "Яндекс маркет", 37], ["vprok", "Банк Открытие (Росгосстрах Банк)", 12], ["sber", "Sunlight", 1], ["foxford", "Фоксфорд", 101], ["eldorado", "Эльдорадо", 82], ["biggeek", "Биг Гик", 46], ["lamoda", "Ламода", 46], ["ali", "Алиэкспресс", 78], ["aroma", "Арома-Бутик", 63], ["chitai", "Читай город", 41]];
     $("#ps").innerHTML = PS.map(([l, n, k]) => `<a href="#"><img src="${L(l)}" alt=""><span><b>${n}</b><small>${kup(k)}</small></span></a>`).join("");
     const SC = ["Авто", "Аптеки и здоровье", "Банки и страхование", "Гипермаркеты", "Детские товары", "Доставка еды", "Кино и концерты", "Книги", "Косметика и парфюмерия", "Маркетплейсы", "Образование", "Одежда и обувь", "Офис и работа", "Прочее", "Путешествия и билеты", "Развлечения", "Спорт", "Стройка", "Товары для взрослых (18+)", "Товары для дома", "Товары для животных", "Украшения", "Услуги и сервисы", "Фильмы и музыка", "Хостинг, интернет", "Цветы и подарки", "Часы и аксессуары", "Электроника и компьютеры"];

@@ -575,3 +575,21 @@ body[data-page="store"] .cu--sub .cu__badge { top: -1px; left: 23px; }
 .tag--sale { background: #fff3f2; border-color: #ffe1de; color: #f26d61; }
 .tag--cash { background: #fff3eb; border-color: #ffe2cf; color: #f28f49; }
 @media (max-width: 1023px) { .hd__in { display: flex; } .hd__r { margin-left: auto; } }
+
+/* условия: раскрываются обычным текстом внутри купона, без серой подложки */
+.cu__more { padding: 0; margin-top: -4px; border-radius: 0; background: none; font-size: 14px; line-height: 20px; color: #45474d; }
+/* «По подписке»: строка обрезается с растворением, кнопка-шеврон 24px раскрывает текст (макет 427:43524) */
+.cu__m .msg { display: flex; align-items: flex-start; gap: 0; min-width: 0; color: #45474d; }
+.msg__t { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; -webkit-mask: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask: linear-gradient(90deg, #000 calc(100% - 40px), transparent); }
+.msg__x { flex: none; width: 24px; height: 24px; margin-left: 8px; border-radius: 8px; background: rgba(31, 32, 33, .24); display: grid; place-items: center; transition: background-color .15s; }
+.msg__x:hover { background: rgba(31, 32, 33, .36); }
+.msg__x svg { width: 24px; height: 24px; fill: #fcfdff; transition: transform .2s; }
+.msg.is-open .msg__t { white-space: normal; -webkit-mask: none; mask: none; }
+.msg.is-open .msg__x svg { transform: rotate(180deg); }
+/* ===== главная: без теней у блоков, как в макете (только обводка 1px) ===== */
+body[data-page="home"] .card, body[data-page="home"] .search, body[data-page="home"] .qchip { box-shadow: none; border: 1px solid #ebedf2; }
+body[data-page="home"] .lift:hover { box-shadow: none; border-color: #d5d8e0; }
+body[data-page="home"] .brand--citi { border-color: transparent; }
+/* внутренние поля карточек 24px, как в макете — стрелка листалки (до 20px внутрь) не наезжает на текст */
+.cp { padding: 24px; }
+.ishop { padding: 16px 24px; }
