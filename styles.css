@@ -739,3 +739,70 @@ body[data-page="home"] .top { padding-top: 24px; }
   .author .sb__role { display: block; font-size: 14px; line-height: 20px; color: var(--muted); }
 }
 @media (max-width: 767px) { .arts2 { padding-left: 16px !important; padding-right: 16px !important; scroll-padding-left: 16px; } }
+
+/* ================= ГЛАВНАЯ, МОБИЛКА ПО МАКЕТУ 113:48125 ================= */
+.all-btn { display: none; }
+@media (max-width: 767px) {
+  body[data-page="home"] main.wrap { display: flex; flex-direction: column; }
+  body[data-page="home"] main > section:has(#soon) { order: 1; }
+  body[data-page="home"] main > section:has(#fresh) { order: 2; }
+  body[data-page="home"] main > section:has(#ishops), body[data-page="home"] main > section:has(#cats), body[data-page="home"] main > section:has(#arts), body[data-page="home"] main > section:has(.faq) { order: 3; }
+  body[data-page="home"] .block { margin-top: 32px; }
+  body[data-page="home"] .h2 { justify-content: space-between; font-size: 24px; line-height: 32px; margin-bottom: 16px; }
+  body[data-page="home"] .top { padding-top: 16px; }
+  .top h1 { font-size: 28px; line-height: 36px; }
+  /* логотипы — лента */
+  .brands { display: flex; gap: 16px; overflow-x: auto; margin: 16px -16px 0; padding: 0 16px 2px; scrollbar-width: none; }
+  .brands::-webkit-scrollbar { display: none; }
+  .brand { flex: 0 0 78px; height: 78px; }
+  /* слайдер во всю ширину экрана */
+  .slider { margin: 32px -16px 0; }
+  .slider .row { gap: 0; }
+  .slide { flex: 0 0 100%; width: 100%; height: 168px; border-radius: 0; }
+  .slider .arr { display: none; }
+  /* поиск: печенька сидит на поле, запросы лентой */
+  .search-row { margin-top: 72px; }
+  .search-row__cookie { display: block; left: 24px; top: -44px; }
+  .search-row__cookie--top { display: block; }
+  .queries { flex-wrap: nowrap; overflow-x: auto; margin: 12px -16px 0; padding: 0 16px; font-size: 0; scrollbar-width: none; }
+  .queries::-webkit-scrollbar { display: none; }
+  .qchip { flex: none; }
+  /* эксклюзивный баннер — по центру */
+  .excl { height: auto; flex-direction: column; align-items: stretch; padding: 16px 16px 0; text-align: center; }
+  .excl__txt { display: flex; flex-direction: column; align-items: center; }
+  .excl h2 { font-size: 24px; line-height: 28px; }
+  .excl h2 span { display: inline-block; }
+  .excl h2 span:last-child { border-radius: 16px; padding: 0 12px; }
+  .excl p { margin-top: 12px; font-size: 16px; line-height: 24px; max-width: none; }
+  .excl .btn { margin-top: 24px; width: 100%; justify-content: center; }
+  .excl__mascot { position: relative; left: auto; top: auto; display: block; height: 140px; margin: 8px auto 0; }
+  /* популярные магазины — 3 колонки */
+  .pstores { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px; }
+  /* промокоды: карточки без кнопки, «Все предложения» под популярными */
+  #popular .cp .btn, #fresh .cp .btn, #soon .cp .btn { display: none; }
+  #popular .cp, #fresh .cp { flex: 0 0 296px; width: 296px; }
+  .all-btn { display: flex; width: 100%; height: 40px; margin-top: 16px; justify-content: center; }
+  #soon .row { flex-direction: column; overflow: visible; gap: 16px; }
+  #soon .cp { width: 100%; }
+  #soon .cp:nth-child(n+5) { display: none; }
+  #soon .dots { display: none; }
+  /* интересные магазины — лента в 5 рядов */
+  #ishops .row { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -16px; padding: 0 16px 4px; gap: 16px; scrollbar-width: none; }
+  #ishops .row::-webkit-scrollbar { display: none; }
+  #ishops .ishops { width: auto !important; display: grid; grid-auto-flow: column; grid-template-rows: repeat(5, auto); grid-auto-columns: 256px; grid-template-columns: none; gap: 16px; flex: none; }
+  #ishops .ishop { scroll-snap-align: start; }
+  #ishops .dots { display: none; }
+  /* статьи — карточки 240 */
+  #arts .row { margin: 0 -16px; padding: 0 16px; gap: 16px; }
+  #arts .art { flex: 0 0 240px; width: 240px; height: 240px; }
+}
+
+.search-row__cookie-m { display: none; }
+@media (max-width: 767px) {
+  .search-row { margin-top: 64px; }
+  .search-row__cookie, .search-row__cookie--top { display: none !important; }
+  .search-row__cookie-m { display: block; position: absolute; left: 13px; top: -50px; width: 96px; height: 64px; z-index: 2; pointer-events: none; }
+  .excl h2 { font-size: 22px; line-height: 28px; letter-spacing: 0; }
+  .excl h2 span { padding: 0 8px; }
+  .pstore > span:last-child { font-size: 13px; white-space: nowrap; }
+}
