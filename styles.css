@@ -600,4 +600,4 @@ body[data-page="home"] .brand--citi { border-color: transparent; }
 .modal__logo img { border-radius: 8px; }
 @media (max-width: 767px) { .ishop__img { width: 64px; height: 64px; } }
 /* Ситилинк в плитке — оранжевый квадрат целиком, как в макете */
-.pstore__img:has(img[src$="logo/citilink.jpg"]) { background: #fc6a1b; }
+.pstore__img:has(img[src$="logo/citilink.jpg"]) { background: #fe5301; }
