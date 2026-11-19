@@ -601,3 +601,14 @@ body[data-page="home"] .brand--citi { border-color: transparent; }
 @media (max-width: 767px) { .ishop__img { width: 64px; height: 64px; } }
 /* Ситилинк в плитке — оранжевый квадрат целиком, как в макете */
 .pstore__img:has(img[src$="logo/citilink.jpg"]) { background: #fe5301; }
+/* листалки отодвинуты от карточек, чтобы не задевать текст (зазор до текста 12px) */
+.carousel:not(.slider) > .arr--l { left: -32px; }
+.carousel:not(.slider) > .arr--r { right: -32px; }
+@media (max-width: 1319px) { .carousel:not(.slider) > .arr--l { left: -20px; } .carousel:not(.slider) > .arr--r { right: -20px; } }
+/* печенька у поиска: низ на уровне низа поля, как в макете */
+.search-row__cookie { top: -16px; left: -45px; }
+/* все категории скидок — по макету: поля 16, иконка 60, название Medium 16/24, счётчик 14/20 */
+.cat { gap: 16px; padding: 16px; min-height: 92px; }
+.cat__ic { margin: 0; }
+.cat b { font-weight: 500; font-size: 16px; line-height: 24px; color: var(--text); }
+.cat span span { display: block; font-size: 14px; line-height: 20px; color: var(--muted); }
