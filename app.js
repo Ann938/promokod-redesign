@@ -191,7 +191,7 @@
       document.body.dataset.v = V;
       list.innerHTML = CU.filter((c) => filter === "all" || c.goods || c.best || (c.f || "promo") === filter).map(cu).join("");
       if ($("#goods")) carousel($("#goods"));
-      $("#expired").innerHTML = [{ ty: "val", val: "-50%", t: "Снижены цены до 50% на технику из подборки", d: "Срок акции истёк", seen: 26371, exp: 1 }, { ty: "val", val: "2 000 ₽", t: "-2000 рублей на технику для дома при приобретении в кредит", d: "Срок акции истёк", seen: 235, exp: 1 }].map(cu).join("");
+      $("#expired").innerHTML = [{ ty: "val", val: "-50%", t: "Снижены цены до 50% на технику из подборки", d: "Срок акции истёк", seen: 26371, exp: 1 }, { ty: "cash", t: "Кешбэк 2% за покупку компьютерной техники", d: "Срок акции истёк", seen: 235, exp: 1, act: 1 }].map(cu).join("");
       const sim = $("#similar");
       const cards = SIM.map((c) => cp({ ...c, d: "До 31 июл. 2026" })).join("");
       if (V === "v3") { sim.className = "carousel sim-car"; sim.innerHTML = `<div class="row">${cards}</div>${arrows}`; carousel(sim); }
@@ -209,7 +209,7 @@
     $("#filters").addEventListener("click", (e) => { const b = e.target.closest(".f"); if (!b) return; $$(".f").forEach((x) => x.classList.toggle("on", x === b)); filter = b.dataset.f; draw(); });
     document.addEventListener("click", (e) => { const c = e.target.closest("[data-cond]"); if (c) c.closest(".cu").classList.toggle("open"); });
     const PS = [["ymarket", "Яндекс маркет", 37], ["vprok", "Банк Открытие (Росгосстрах Банк)", 12], ["sber", "Sunlight", 1], ["foxford", "Фоксфорд", 101], ["eldorado", "Эльдорадо", 82], ["biggeek", "Биг Гик", 46], ["lamoda", "Ламода", 46], ["ali", "Алиэкспресс", 78], ["aroma", "Арома-Бутик", 63], ["chitai", "Читай город", 41]];
-    $("#ps").innerHTML = PS.map(([l, n, k]) => `<a href="#"><img src="${L(l)}" alt=""><span>${n}<small>${kup(k)}</small></span></a>`).join("");
+    $("#ps").innerHTML = PS.map(([l, n, k]) => `<a href="#"><img src="${L(l)}" alt=""><span><b>${n}</b><small>${kup(k)}</small></span></a>`).join("");
     const SC = ["Авто", "Аптеки и здоровье", "Банки и страхование", "Гипермаркеты", "Детские товары", "Доставка еды", "Кино и концерты", "Книги", "Косметика и парфюмерия", "Маркетплейсы", "Образование", "Одежда и обувь", "Офис и работа", "Прочее", "Путешествия и билеты", "Развлечения", "Спорт", "Стройка", "Товары для взрослых (18+)", "Товары для дома", "Товары для животных", "Украшения", "Услуги и сервисы", "Фильмы и музыка", "Хостинг, интернет", "Цветы и подарки", "Часы и аксессуары", "Электроника и компьютеры"];
     const ICN = [1, 15, 2, 16, 3, 17, 4, 18, 5, 19, 6, 20, 7, 21, 8, 22, 9, 23, 10, 24, 11, 25, 12, 26, 13, 27, 14, 28];
     $("#scats").innerHTML = SC.map((n, i) => `<a href="#"><img src="img/cat/c${ICN[i]}.svg" alt="">${n}</a>`).join("");

@@ -7,16 +7,17 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" href="img/logo-icon.svg">
-<link rel="stylesheet" href="styles.css?v=6">
+<link rel="stylesheet" href="styles.css?v=8">
 </head>
 <body data-page="store">
 <div class="info">Сервис создан, поддерживается и контролируется командой Пикабу. <a href="#">Подробнее</a></div>
 <header class="hd" id="hd"></header>
 
 <main class="wrap">
-  <h1 class="store-h1">Промокоды Ситилинк на сентябрь 2025</h1>
   <div class="layout">
-    <div>
+    <div class="col">
+      <h1 class="store-h1">Промокоды Ситилинк на сентябрь 2025</h1>
+      <a class="ads" href="#"><img src="img/ban/ads-otello.jpg" alt="Отелло: скидки на отели до 30% и -2000 руб по промокоду"></a>
       <div class="filters" id="filters" role="toolbar" aria-label="Фильтр купонов">
         <button class="f on" data-f="all" type="button">Актуально сегодня <small>170</small></button>
         <button class="f" data-f="promo" type="button">Промокоды <small>14</small></button>
@@ -28,10 +29,12 @@
 
       <h2 class="sec-h">Выбор редактора</h2>
       <section class="editor card">
-        <div class="editor__who"><span class="editor__ava"></span><span><b>Соколова Анна</b><span>Сегодня среди 72 предложений AliExpress я бы выделила эти три.</span></span></div>
-        <a class="ed" href="#"><span class="ed__v">-20%</span><span><small>Для большой покупки</small>Закрытая распродажа с выгодой до 50% авторизованным пользователям</span><span><svg class="ic ic--s" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span></a>
-        <a class="ed" href="#"><span class="ed__v">-30%</span><span><small>Для первого заказа</small>Наборы аккумуляторного инструмента со скидками до 30%</span><span><svg class="ic ic--s" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span></a>
-        <a class="ed" href="#"><span class="ed__v" style="color:var(--accent)"><svg class="ic" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/></svg></span><span><small>Выгодно для всех</small>Розыгрыш при покупке товаров от бренда АвтоДело</span><span><svg class="ic ic--s" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span></a>
+        <div class="author"><img class="ava" src="img/ava.jpg" alt=""><span><b>Соколова Анна</b><span>Сегодня среди 72 предложений AliExpress я бы выделила эти три.</span></span></div>
+        <div class="eds">
+          <a class="ed" href="#"><span class="sq sq--val">-50%</span><span><em class="lbl lbl--green">Для большой покупки</em><b>Закрытая распродажа с выгодой до 50% авторизованным пользователям</b></span><span class="ed__go"><svg class="ic ic--s" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span></a>
+          <a class="ed" href="#"><span class="sq sq--val">-30%</span><span><em class="lbl lbl--orange">Для первого заказа</em><b>Наборы аккумуляторного инструмента со скидками до 30%</b></span><span class="ed__go"><svg class="ic ic--s" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span></a>
+          <a class="ed" href="#"><img class="sq" src="img/sq/v1-gift.svg" alt="Подарок"><span><em class="lbl lbl--blue">Выгодно для всех</em><b>Розыгрыш при покупке товаров от бренда АвтоДело</b></span><span class="ed__go"><svg class="ic ic--s" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></svg></span></a>
+        </div>
       </section>
 
       <h2 class="sec-h">Истекшие купоны</h2>
@@ -42,72 +45,96 @@
       <div class="sim" id="similar"></div>
 
       <h2 class="sec-h">Часто задаваемые вопросы о Ситилинк</h2>
-      <div class="faq">
-        <details class="qa card" open><summary>Как получить скидку 50% в Ситилинк?<svg class="ic" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Купи 2 товара из категории «Бытовая техника» — получи скидку 50% на более дешёвый товар!</p></details>
-        <details class="qa card"><summary>Как получить 1000 бонусов Ситилинк?<svg class="ic" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Зарегистрируйтесь в программе лояльности и сделайте первый заказ в приложении.</p></details>
-        <details class="qa card"><summary>Как получить скидку 500 рублей в Ситилинк?<svg class="ic" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg></summary><p>Подпишитесь на рассылку магазина — промокод придёт на почту.</p></details>
+      <div class="faq faq--store">
+        <details class="qa card" open><summary>Как получить скидку 50% в Ситилинк?<i class="mi mi--chev" aria-hidden="true"></i></summary><p>Купи 2 товара из категории "Бытовая техника" — получи скидку 50% на более дешёвый товар!</p></details>
+        <details class="qa card"><summary>Как получить 1000 бонусов Ситилинк?<i class="mi mi--chev" aria-hidden="true"></i></summary><p>Зарегистрируйтесь в программе лояльности и сделайте первый заказ в приложении.</p></details>
+        <details class="qa card"><summary>Как получить скидку 500 рублей в Ситилинк?<i class="mi mi--chev" aria-hidden="true"></i></summary><p>Подпишитесь на рассылку магазина — промокод придёт на почту.</p></details>
       </div>
 
       <h2 class="sec-h">Похожие магазины</h2>
-      <div class="tags"><a href="#">Ламода</a><a href="#">Wildberries</a><a href="#">OZON</a><a href="#">AliExpress</a><a href="#">Яндекс.Маркет</a><a href="#">Citilink</a><a href="#">M.Video</a><a href="#">Эльдорадо</a><a href="#">Goods</a><a href="#">Asos, Shein</a><a href="#">Brandshop</a><a href="#">Gloria Jeans</a><a href="#">Reserv</a><a href="#">Kari</a><a href="#">Levi's</a><a href="#">Adidas</a><a href="#">Nike</a><a href="#">Ivoise</a></div>
+      <div class="tags"><a href="#">Ламода</a><a href="#">Wildberries</a><a href="#">OZON</a><a href="#">AliExpress</a><a href="#">Яндекс.Маркет</a><a href="#">Citilink</a><a href="#">M.Video</a><a href="#">Эльдорадо</a><a href="#">Goods</a><a href="#">Asos, Shein</a><a href="#">Brandshop</a><a href="#">Gloria Jeans</a><a href="#">Reserv</a><a href="#">Kari</a><a href="#">Levi's</a><a href="#">Adidas</a><a href="#">Nike</a><a href="#">Ivrose</a></div>
 
       <h2 class="sec-h">Ситилинк</h2>
       <section class="about card">
-        <h3>Общая информация об интернет-магазине Ситилинк</h3>
-        <p>Citilink.ru — это популярный интернет-магазин электроники и бытовой техники, который предлагает широкий ассортимент продукции. Покупатели могут найти здесь всё — от мелкой бытовой техники до компьютеров и смартфонов, а также аксессуары и комплектующие.</p>
-        <h3>Ассортимент интернет-магазина Ситилинк</h3>
-        <p>Ассортимент магазина регулярно обновляется: компьютеры и комплектующие, смартфоны, телевизоры, бытовая техника, инструменты и товары для дома.</p>
-        <h3>Как активировать промокод?</h3>
-        <p>Добавьте товары в корзину, при оформлении заказа найдите поле «Промокод», вставьте код и нажмите «Применить».</p>
+        <h3>Общая информация об интернет-магазине Ситилинк</h3><p>Citilink.ru – это популярный интернет-магазин бытовой техники и электроники. Широкий ассортимент продукции представлен более 50000 позициями от ведущих мировых и отечественных производителей. Покупателям предлагается накопительная программа, доставка во все регионы России и удобные способы оплаты.</p><h3>Ассортимент современного интернет-магазина Ситилинк</h3><p>Citilink.ru – это популярный интернет-магазин бытовой техники и электроники. Широкий ассортимент продукции представлен более 50000 позициями от ведущих мировых и отечественных производителей. Покупателям предлагается накопительная программа, доставка во все регионы России и удобные способы оплаты.</p><h3>Как приобрести товары со скидкой в интернет-магазине Ситилинк?</h3><p>Citilink.ru – это популярный интернет-магазин бытовой техники и электроники. Широкий ассортимент продукции представлен более 50000 позициями от ведущих мировых и отечественных производителей. Покупателям предлагается накопительная программа, доставка во все регионы России и удобные способы оплаты.</p><h3>Как правильно активировать промокод в интернет-магазине Ситилинк?</h3><p>Citilink.ru – это популярный интернет-магазин бытовой техники и электроники. Широкий ассортимент продукции представлен более 50000 позициями от ведущих мировых и отечественных производителей. Покупателям предлагается накопительная программа, доставка во все регионы России и удобные способы оплаты.</p><h3>Как оформить заказ на товары из интернет-магазина Ситилинк?</h3><p>Citilink.ru – это популярный интернет-магазин бытовой техники и электроники. Широкий ассортимент продукции представлен более 50000 позициями от ведущих мировых и отечественных производителей. Покупателям предлагается накопительная программа, доставка во все регионы России и удобные способы оплаты.</p>
+        <div class="adnote">Реклама. Информация о рекламодателе по ссылке в карточке акции.</div>
       </section>
+
+      <h2 class="sec-h">Как активировать промокод?</h2>
+      <section class="about card">
+        <ul class="howto">
+          <li>Откройте сайт аптеки и авторизуйтесь в личном кабинете.</li>
+          <li>Добавьте товары в корзину.</li>
+          <li>Перейдите в корзину, кликнув на иконку в правом верхнем углу экрана.</li>
+          <li>Нажмите на кнопку "Перейти к оформлению" и найдите поле "Промокод", расположенное справа от списка товаров.</li>
+          <li>Вставьте промокод и нажмите "Применить". Скидка отразится в итоговой сумме заказа.</li>
+          <li>Подтвердите заказ, выбрав способ получения и оплаты.</li>
+        </ul>
+      </section>
+
+      <h2 class="sec-h">Где вводить промокод в Ситилинк?</h2>
+      <div class="video">
+        <img src="img/video.jpg" alt="Видеоинструкция: где вводить промокод в Ситилинк">
+        <button class="video__play" type="button" aria-label="Смотреть видео"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="#fff"/></svg></button>
+        <div class="video__bar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="#fff"/></svg><i><b></b></i><span>08:43 / 24:54</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5" stroke="#fff" stroke-width="2" fill="none"/></svg><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4zM16 9a4 4 0 0 1 0 6" stroke="#fff" stroke-width="2" fill="none" stroke-linejoin="round"/></svg></div>
+      </div>
+
+      <h2 class="sec-h">Статьи по теме</h2>
+      <div class="arts2">
+        <a class="art" href="#"><img src="img/art/a1.jpg" alt=""><span>Подарки с теплом: уютные и практичные новогодние сюрпризы.</span></a>
+        <a class="art" href="#"><img src="img/art/a2.jpg" alt=""><span>Как эффективно готовиться к экзаменам: лучшие советы для школьников</span></a>
+      </div>
+      <nav class="crumbs" aria-label="Хлебные крошки"><a href="index.html">Главная</a><a href="#">Магазины</a><a href="#">Электроника</a><span>Промокоды Ситилинк</span></nav>
     </div>
 
     <aside class="side">
-      <section class="sb card">
-        <div class="sb__shop"><img src="img/logo/citilink_sq.jpg" alt="Ситилинк"><span><span class="stars">★★★<i>★★</i></span><small>Средний рейтинг 3.73</small><small>32 оценки</small></span></div>
-        <h4 style="margin-top:12px">О магазине</h4>
-        <p style="margin-top:0">Citylink — это не просто торговая точка, это целый мир возможностей в современных решениях для тех, кто стремится к качеству и разнообразию. В электронных стенах этого класса сервиса собрано множество товаров различных категорий — от передовой электроники и бытовой техники до стильных гаджетов, мощных компьютеров, захватывающих игр и полезных предметов для дома.</p>
+      <section class="sb">
+        <div class="sb__shop"><img src="img/logo/citilink_sq.jpg" alt="Ситилинк"><span><span class="stars">★★★<i>★★</i></span><small>Средний рейтинг 3.73<br>32 оценки</small></span></div>
+        <h4 class="sb__t">О магазине</h4>
+        <p class="sb__s">Citylink - это не просто торговая точка, это целый мир возможностей и современных решений для тех, кто стремится к качеству и разнообразию. В электронных стенах этого класс сервиса собрано множество товаров различных категорий - от передовой электроники и бытовой техники до стильных гаджетов, мощных компьютеров, захватывающих игр и уютных предметов для дома.</p>
         <a class="lnk" href="#">Перейти в магазин</a>
-        <h4 style="margin-top:12px">Контакты Ситилинк</h4>
-        <p style="margin-top:0">— 8-800-600-7775<br>— pr@mvideo.ru<br>— 105066, г. Москва, ул. Нижняя Красносельская, д. 40/12, корпус 20</p>
-        <h4 style="margin-top:12px">Оплата в Ситилинк</h4>
-        <p style="margin-top:0">— Банковская карта<br>— Наличные при получении</p>
-        <h4 style="margin-top:12px">Доставка</h4>
-        <p style="margin-top:0">Подробнее о способах доставки можно узнать при оформлении заказа</p>
-        <h4 style="margin-top:12px">Возврат заказа</h4>
-        <p style="margin-top:0">В случае возникновения спорных моментов обратитесь к менеджеру</p>
-        <dl><dt>Активные промокоды и скидки</dt><dd>1000</dd><dt>Лучшая скидка в %</dt><dd>100%</dd><dt>Лучшая скидка в ₽</dt><dd>40000 ₽</dd><dt>Дата обновления</dt><dd>11 ноября 2023</dd><dt>Купонов добавлено сегодня</dt><dd>14</dd><dt>Купонов удалено сегодня</dt><dd>2</dd><dt>Последнее успешное применение</dt><dd>сегодня в 12:50</dd><dt>Просмотров за 30 дней</dt><dd>125</dd><dt>Пользователи воспользовались</dt><dd>1254</dd></dl>
+        <h5>Контакты Ситилинк</h5>
+        <p class="sb__s">— 8-800-600-7775<br>— pr@mvideo.ru<br>— 105066, г. Москва, ул. Нижняя Красносельская, д. 40/12, корпус 20</p>
+        <h5>Оплата в Ситилинк</h5>
+        <p class="sb__s">— Банковская карта<br>— Наличные при получении</p>
+        <h5>Доставка</h5>
+        <p class="sb__s">Подробнее о способах доставки можно узнать при оформлении заказа</p>
+        <h5>Возврат заказа</h5>
+        <p class="sb__s">В случае возникновения спорных моментов обратитесь к менеджеру</p>
+        <dl class="stats"><dt>Активные промокоды и скидки</dt><dd>1000</dd><dt>Лучшая скидка в %</dt><dd>100%</dd><dt>Лучшая скидка в ₽</dt><dd>40000 ₽</dd><dt>Дата обновления</dt><dd>11 ноября 2023</dd><dt>Купонов добавлено сегодня</dt><dd>14</dd><dt>Купонов удалено сегодня</dt><dd>2</dd><dt>Последнее успешное применение</dt><dd>сегодня в 12:50</dd><dt>Просмотров за 30 дней</dt><dd>125</dd><dt>Пользователи воспользовались</dt><dd>1254</dd></dl>
       </section>
-      <section class="sb card">
-        <h4>Ситилинк в подборках</h4>
-        <div class="sb__list">
-          <a href="#"><svg class="ic" viewBox="0 0 24 24"><path d="M4 11h16a8 8 0 0 1-16 0ZM8 7c0-1.5 1-1.5 1-3M12 7c0-1.5 1-1.5 1-3M16 7c0-1.5 1-1.5 1-3"/></svg>Скидки и промокоды на доставку еды</a>
-          <a href="#"><svg class="ic" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="10" rx="5"/><path d="M8 10v4M6 12h4M15.5 11h.01M17.5 13h.01"/></svg>Акции на Sony PlayStation 5</a>
+      <section class="sb">
+        <h4 class="sb__t">Ситилинк в подборках</h4>
+        <div class="sb__list sb__list--ic">
+          <a href="#"><img src="img/cat/c17.svg" alt="">Скидки и промокоды на доставку еды</a>
+          <a href="#"><img src="img/cat/c22.svg" alt="">Акции на Sony PlayStation 5</a>
           <a href="#"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>Летние скидки: ТОП акций и промокодов</a>
         </div>
       </section>
-      <section class="sb card">
-        <h4>Популярные магазины <a href="#" aria-label="Все магазины"><svg class="ic ic--s" viewBox="0 0 24 24"><path d="M13 4h7v7M20 4l-9 9M18 14v4a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4"/></svg></a></h4>
-        <div class="sb__list" id="ps"></div>
+      <section class="sb">
+        <h4 class="sb__t">Популярные магазины <a href="#" aria-label="Все магазины"><i class="mi mi--ext"></i></a></h4>
+        <div class="sb__list sb__list--shops" id="ps"></div>
       </section>
-      <section class="sb card">
-        <h4>Все категории</h4>
+      <section class="sb">
+        <h4 class="sb__t sb__t--m">Все категории</h4>
         <div class="sb__cats" id="scats"></div>
       </section>
-      <section class="sb card">
-        <h4>Страница обновлена</h4>
-        <div class="editor__who"><span class="editor__ava"></span><b style="font-size:14px">Соколова Анна</b></div>
-        <p><span style="color:var(--muted)">Редактор промокодной витрины</span><br>Внимательный и ответственный копирайтер, который ежедневно помогает пользователям сервиса FivePost находить рабочие промокоды и выгодные акции.</p>
+      <section class="sb">
+        <h4 class="sb__t sb__t--m">Страница обновлена</h4>
+        <div class="author author--s"><img class="ava" src="img/ava.jpg" alt=""><b>Соколова<br>Анна</b></div>
+        <p class="sb__m">Редактор промокодной витрины</p>
+        <p class="sb__b">Внимательный и ответственный копирайтер, который ежедневно помогает пользователям сервиса FivePost находить рабочие промокоды и выгодные акции. Она вручную проверяет каждое предложение, чтобы на нашем сайте не появлялись устаревшие или недействительные купоны. Ольга анализирует маркетинговые кампании популярных</p>
         <a class="lnk" href="#">Об авторе</a>
       </section>
-      <section class="sb card">
-        <h4>Pikabu Промокоды в соцсетях!</h4>
-        <p style="margin-top:0">Самые интересные скидки и предложения в наших каналах:</p>
-        <div class="sb__list" style="margin-top:8px"><a href="#"><span style="width:32px;height:32px;border-radius:50%;background:#2aabee;display:grid;place-items:center;color:#fff;flex:none"><svg class="ic ic--s" viewBox="0 0 24 24" style="stroke:#fff"><path d="m3 11 18-7-3 16-6-5-3 4v-6l9-7"/></svg></span>Телеграм</a><a href="#"><span style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#5b7cff,#a24bff);flex:none"></span>MAX</a></div>
+      <section class="sb">
+        <h4 class="sb__t sb__t--m">Pikabu Промокоды<br>в соцсетях!</h4>
+        <p class="sb__b">Самые интересные скидки и предложения в наших каналах:</p>
+        <div class="soc"><a href="#"><img src="img/ic/tg.svg" alt="">Телеграмм</a><a href="#"><img src="img/ic/max.svg" alt="">MAX</a></div>
       </section>
     </aside>
   </div>
 </main>
+
 
 <footer class="ft" id="ft"></footer>
 
@@ -122,6 +149,6 @@
   </div>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<script src="app.js?v=6"></script>
+<script src="app.js?v=8"></script>
 </body>
 </html>
