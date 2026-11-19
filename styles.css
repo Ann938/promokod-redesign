@@ -806,3 +806,19 @@ body[data-page="home"] .top { padding-top: 24px; }
   .excl h2 span { padding: 0 8px; }
   .pstore > span:last-child { font-size: 13px; white-space: nowrap; }
 }
+/* карточка промокода: без «дырки» под текстом — дата сразу под заголовком; в ряду карточек одной высоты дата прижимается вниз */
+.cp__t { min-height: 0; }
+.cp__d { margin-top: auto; padding-top: 12px; }
+/* страница магазина: у логотипов без своего фона — подложка #F7F8FC (белый фон картинки растворяется) */
+body[data-page="store"] .cp__logo, body[data-page="store"] .sq--logo { background: #f7f8fc; }
+body[data-page="store"] .cp__logo img, body[data-page="store"] .sq--logo img { mix-blend-mode: multiply; }
+@media (max-width: 767px) {
+  body[data-page="store"] .sb__list--shops img { background: #f7f8fc; }
+}
+
+.sb__logo { width: 48px; height: 48px; flex: none; border-radius: 8px; overflow: hidden; background: #fcfdff; display: grid; place-items: center; }
+.sb__list--shops .sb__logo img { width: 100%; height: 100%; border-radius: 0; background: none; object-fit: contain; }
+@media (max-width: 767px) {
+  .sb__logo { background: #f7f8fc; }
+  .sb__list--shops .sb__logo img { mix-blend-mode: multiply; }
+}
