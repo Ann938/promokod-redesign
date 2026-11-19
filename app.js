@@ -34,7 +34,11 @@
 
   /* ---------- шапка и подвал ---------- */
   function chrome() {
+    const pb = document.createElement("div"); pb.className = "pb";
+    pb.innerHTML = `<img src="img/pb-l.png" alt=""><a class="btn pb__btn" href="#">Больше скидок</a><img src="img/pb-r.png" alt="">`;
+    $("#hd").before(pb);
     $("#hd").innerHTML = `<div class="wrap hd__in">
+      <button class="hd__burger" type="button" aria-label="Меню"><svg class="ic" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       <a class="logo" href="index.html" aria-label="Пикабу Промокоды — на главную"><img src="img/logo-icon.svg" alt=""><img src="img/logo-text.svg" alt="Пикабу Промокоды">${ic("down")}</a>
       <nav class="nav" aria-label="Разделы">
         <a class="nav__a" href="#">Каталог ${ic("down")}</a>
@@ -43,7 +47,7 @@
         <a class="save" href="#">Сэкономь ещё<img src="img/cookie.svg" alt=""></a>
       </nav>
       <div class="hd__r"><label class="hd__search"><input type="search" placeholder="Магазины" aria-label="Поиск магазина">${ic("search")}</label>
-      <a class="btn btn--primary" href="#">Вход</a></div>
+      <button class="hd__sicon" type="button" aria-label="Поиск">${ic("search")}</button><a class="btn btn--primary" href="#">Вход</a></div>
     </div>`;
     $("#ft").innerHTML = `<div class="wrap ft__in">
       <a class="logo" href="index.html"><img src="img/logo-icon.svg" alt=""><img src="img/logo-text.svg" alt="Пикабу Промокоды"></a>
@@ -135,7 +139,7 @@
   const VARS = [["v0", "Серые плашки"], ["v1", "Вариант 1"], ["v2", "Вариант 2"]];
   let V = (location.hash.match(/v[0-2]/) || ["v1"])[0];
   const mi = (n) => `<i class="mi mi--${n}" aria-hidden="true"></i>`;
-  const COND = `<div class="cu__more">Промокод действует на весь ассортимент, кроме товаров из раздела «Уценка». Не суммируется с другими акциями. Один промокод — на один заказ.</div>`;
+  const COND = `<div class="cu__more"><span class="cu__more-t">Промокод действует на весь ассортимент, кроме товаров из раздела «Уценка». Не суммируется с другими акциями. Один промокод — на один заказ.</span><button class="msg__x" type="button" data-cond aria-label="Показать условия"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.62 15.73l4.73-4.71a.83.83 0 0 0 0-1.18.85.85 0 0 0-1.18 0l-4.19 4.12-4.15-4.12a.85.85 0 0 0-1.18 0 .83.83 0 0 0 0 1.18l4.73 4.71a.83.83 0 0 0 1.24 0Z"/></svg></button></div>`;
   const LBL = { cash: "Кэшбек", sale: "Акция", ship: "Доставка", gift: "Подарок" };
   function square(c) {
     const set = V === "v2" ? "v2" : "v1";
@@ -156,9 +160,9 @@
     const v = V === "v0" ? `<div class="cu__v cu__v--prod${c.ty === "logo" ? " is-logo" : ""}">${prodValue(c)}</div>` : `<div class="cu__v cu__v--sq">${square(c)}</div>`;
     const meta = c.m ? `<span class="msg"><span class="msg__t">${c.m}</span><button class="msg__x" type="button" data-more aria-label="Показать текст полностью" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.62 15.73l4.73-4.71a.83.83 0 0 0 0-1.18.85.85 0 0 0-1.18 0l-4.19 4.12-4.15-4.12a.85.85 0 0 0-1.18 0 .83.83 0 0 0 0 1.18l4.73 4.71a.83.83 0 0 0 1.24 0Z"/></svg></button></span>`
       : `<span class="when">${mi("clock")}${c.d || "До 30 июн. 2026"}</span>${c.exp ? "" : `<span>${mi("check")}Проверено</span>`}<span>${mi("eye")}${c.seen || 3669} раз</span>`;
-    const btn = c.sub ? `<button class="btn btn--l btn--orange" type="button" data-code>Забрать по подписке</button><span class="cu__sub">Подписка 199 ₽/мес</span>`
-      : `<button class="btn btn--l ${c.act ? "btn--outline" : "btn--primary"}" type="button" data-code>${c.act ? "Открыть акцию" + mi("ext") : "Показать промокод"}</button>${c.act ? "" : `<button class="cu__cond" type="button" data-cond>Условия${mi("chev")}</button>`}`;
-    return `<article class="cu card${c.k ? " cu--" + c.k : ""}${c.exp ? " cu--exp" : ""}" data-f="${c.f || "promo"}">${c.b ? `<span class="cu__badge">${c.b}</span>` : ""}${v}<div><div class="cu__t">${c.t}</div><div class="cu__m">${meta}</div></div><div class="cu__r">${btn}</div>${c.sub || c.act ? "" : COND}</article>`;
+    const btn = c.sub ? `<button class="btn btn--l btn--orange" type="button" data-code>Забрать <span class="m-only">скидку </span>по подписке</button><span class="cu__sub">Подписка 199 ₽/мес<span class="m-only"> · Отмена в любой момент</span></span>`
+      : `<button class="btn btn--l ${c.act ? "btn--outline" : "btn--primary"}" type="button" data-code>${c.act ? "Открыть акцию" + mi("ext") : "Показать промокод"}</button>${c.act ? "" : `<button class="cu__cond" type="button" data-cond>Условия${mi("chev")}</button>`}<span class="cu__used">Использовано ${c.seen || 3669} раз</span>`;
+    return `<article class="cu card${c.k ? " cu--" + c.k : ""}${c.exp ? " cu--exp" : ""}" data-f="${c.f || "promo"}">${c.b ? `<span class="cu__badge">${c.b}</span>` : ""}${v}<div class="cu__txt"><div class="cu__t">${c.t}</div><div class="cu__m">${meta}</div></div><div class="cu__r">${btn}</div>${c.sub || c.act ? "" : COND}</article>`;
   }
   function goods() {
     const G = [["g1", "Солнечный фонарь из железа", "661 ₽", "2 170 ₽", "-69%", "Выбор редакции", "#7b5cf0"], ["g2", "Робот-пылесос Dreame L40 Ultra CE, 70 Вт", "30 039 ₽", "112 657 ₽", "-73%", "Лучшая цена", "#f08a24"], ["g3", "Смартфон Samsung S23 8/256GB Black", "2 588 ₽", "3 800 ₽", "-10%", "Скоро закончится!", "#e0474c"], ["g2", "Робот-пылесос Dreame D10s Plus, станция самоочистки", "24 990 ₽", "39 990 ₽", "-37%", "Лучшая цена", "#f08a24"]];
@@ -217,7 +221,7 @@
     bar.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; V = b.dataset.v; history.replaceState(null, "", "#" + V); draw(); });
     addEventListener("hashchange", () => { const m = location.hash.match(/v[0-2]/); if (m) { V = m[0]; draw(); } });
     draw();
-    $("#filters").addEventListener("click", (e) => { const b = e.target.closest(".f"); if (!b) return; $$(".f").forEach((x) => x.classList.toggle("on", x === b)); filter = b.dataset.f; draw(); });
+    $("#filters").addEventListener("click", (e) => { const b = e.target.closest(".f"); if (!b || !b.dataset.f) return; $$(".f").forEach((x) => x.classList.toggle("on", x === b)); filter = b.dataset.f; draw(); });
     document.addEventListener("click", (e) => { const c = e.target.closest("[data-cond]"); if (c) c.closest(".cu").classList.toggle("open"); });
     document.addEventListener("click", (e) => { const b = e.target.closest("[data-more]"); if (!b) return; const on = b.closest(".msg").classList.toggle("is-open"); b.setAttribute("aria-expanded", on); });
     const PS = [["ymarket", "Яндекс маркет", 37], ["vprok", "Банк Открытие (Росгосстрах Банк)", 12], ["sber", "Sunlight", 1], ["foxford", "Фоксфорд", 101], ["eldorado", "Эльдорадо", 82], ["biggeek", "Биг Гик", 46], ["lamoda", "Ламода", 46], ["ali", "Алиэкспресс", 78], ["aroma", "Арома-Бутик", 63], ["chitai", "Читай город", 41]];

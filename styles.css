@@ -632,3 +632,110 @@ body[data-page="home"] .top { padding-top: 24px; }
 .carousel:not(.slider) > .arr--r { right: -20px; }
 .carousel:not(.slider) > .arr { top: calc(50% - 4px); }
 #ishops > .arr { top: calc(50% - 16px); }
+
+/* ================= МОБИЛЬНАЯ ВЕРСИЯ ПО МАКЕТУ 427:45325 ================= */
+.m-only, .pb, .hd__burger, .hd__sicon, .sb__name, .sb__all, .cu__used, .cu__more .msg__x, .ed__btn, .sb__role { display: none; }
+.f--s { width: 40px; padding: 0; justify-content: center; }
+.f--s .ic { width: 20px; height: 20px; color: var(--muted); }
+.sb .lnk .mi { display: none; }
+
+@media (max-width: 767px) {
+  .d-only { display: none !important; }
+  span.m-only { display: inline; }
+  div.m-only { display: block; }
+
+  /* шапка: полоса «Больше скидок», бургер, лого, поиск, вход */
+  .info { display: none; }
+  .pb { display: flex; align-items: center; justify-content: space-between; height: 56px; padding: 0 12px; background: #fff3eb; overflow: hidden; }
+  .pb img { width: 56px; height: 56px; }
+  .pb__btn { width: 200px; height: 40px; border-radius: 16px; background: var(--orange); color: #fcfdff; font-weight: 500; font-size: 16px; }
+  .hd__in { height: 72px; display: flex; gap: 8px; }
+  .hd__burger, .hd__sicon { display: grid; place-items: center; width: 40px; height: 40px; color: var(--text2); flex: none; }
+  .hd__burger { margin-left: -8px; }
+  .hd__burger .ic, .hd__sicon .ic { width: 24px; height: 24px; }
+  .hd__search { display: none; }
+  .hd__r { margin-left: auto; gap: 4px; }
+
+  /* порядок блоков как в мобильном макете */
+  body[data-page="store"] .layout { display: flex; flex-direction: column; gap: 0; margin-top: 0; }
+  body[data-page="store"] .col, body[data-page="store"] .side { display: contents; }
+  body[data-page="store"] .blk { order: var(--o); min-width: 0; }
+  .store-h1 { margin: 24px 0 16px; font-size: 20px; line-height: 28px; }
+  .sec-h { margin: 24px 0 16px; font-size: 20px; line-height: 28px; }
+  .sec-p { margin: -8px 0 16px; font-size: 16px; line-height: 24px; color: #45474d; }
+  .filters { margin: 0 -16px 16px; padding: 0 16px; }
+
+  /* купон: квадрат + заголовок и дата, строка условий, кнопка во всю ширину, «Использовано N раз» */
+  body[data-page="store"] .cu, body[data-v] .cu { grid-template-columns: 72px minmax(0, 1fr) !important; column-gap: 16px; row-gap: 12px; align-items: start; padding: 24px 16px 12px !important; min-height: 0; }
+  body[data-page="store"] .cu--sub { padding-bottom: 12px !important; }
+  .cu__v { grid-column: 1; grid-row: 1 / 3; align-self: start; }
+  .cu__txt { display: contents; }
+  .cu__t { grid-column: 2; grid-row: 1; font-size: 16px; line-height: 24px; }
+  .cu__m { grid-column: 2; grid-row: 2; margin-top: -8px; font-size: 12px; line-height: 16px; gap: 4px 8px; }
+  .cu__m .mi { width: 14px; height: 14px; }
+  .cu__m > span:nth-child(3) { display: none; }
+  .cu--sub .cu__m { grid-column: 1 / -1; grid-row: 3; margin-top: 0; }
+  .cu--sub .cu__m .msg, .cu__more { font-size: 16px; line-height: 24px; }
+  .cu__more { grid-column: 1 / -1 !important; grid-row: 3; display: flex !important; align-items: flex-start; margin: 0; color: #45474d; }
+  .cu__more-t { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; -webkit-mask: linear-gradient(90deg, #000 calc(100% - 40px), transparent); mask: linear-gradient(90deg, #000 calc(100% - 40px), transparent); }
+  .cu__more .msg__x { display: grid; }
+  .cu.open .cu__more-t { white-space: normal; -webkit-mask: none; mask: none; }
+  .cu.open .cu__more .msg__x svg { transform: rotate(180deg); }
+  .cu__r { grid-column: 1 / -1; grid-row: 4; display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
+  .cu__r .btn { width: 100%; height: 40px; }
+  .cu__cond { display: none !important; }
+  .cu__used, .cu__sub { display: block; text-align: center; font-size: 12px; line-height: 16px; color: var(--muted); }
+  .cu__badge { left: 16px; }
+
+  /* лучшие предложения — в белой подложке, карточки серые */
+  .best { grid-template-columns: minmax(0, 1fr) !important; gap: 16px; padding: 16px; background: #fcfdff; border: 1px solid #ebedf2; border-radius: 16px; }
+  .best .bo { background: #f7f8fc; border: 0 !important; box-shadow: none; padding: 16px; }
+
+  /* выбор редактора: автор над карточками, каждая карточка с ярлыком и кнопкой */
+  .editor { padding: 0; gap: 16px; background: none !important; border: 0 !important; }
+  .editor .author .ava { width: 72px; height: 72px; }
+  .editor .author b { font-size: 16px; }
+  .editor .author span span { font-size: 14px; line-height: 20px; }
+  .eds { gap: 16px; }
+  .ed { position: relative; grid-template-columns: 72px minmax(0, 1fr) !important; column-gap: 16px; row-gap: 12px; align-items: start; padding: 28px 16px 16px; background: #fcfdff; border: 1px solid #ebedf2; }
+  .ed:hover { background: #fcfdff; }
+  .ed .sq { width: 72px !important; height: 72px !important; font-size: 16px !important; }
+  .ed .lbl { position: absolute; left: 16px; top: 0; margin: 0; border-radius: 0 0 8px 8px; }
+  .ed__btn { display: flex; grid-column: 1 / -1; width: 100%; height: 40px; justify-content: center; }
+
+  /* похожие купоны — в одну колонку */
+  .sim { grid-template-columns: minmax(0, 1fr); }
+
+  /* блоки сайдбара: заголовок над белой карточкой */
+  body[data-page="store"] .sb { position: relative; margin-top: 68px; padding: 16px; background: #fcfdff; border: 1px solid #ebedf2; border-radius: 16px; font-size: 14px; line-height: 20px; }
+  .sb .sb__t { position: absolute; left: 0; top: -45px; margin: 0; font-weight: 700; font-size: 20px; line-height: 28px; color: var(--text); white-space: nowrap; }
+  .sb .sb__t a { display: none; }
+  .sb__shop { margin-bottom: 16px; align-items: center; }
+  .sb__shop img { width: 72px !important; height: 72px !important; }
+  .sb__name { display: block; font-weight: 500; font-size: 16px; line-height: 24px; color: var(--text); }
+  .sb .sb__s { font-size: 14px; line-height: 20px; }
+  .sb:has(.sb__shop) > .lnk { display: flex; align-items: center; justify-content: center; gap: 8px; height: 40px; margin: 16px 0 4px; border: 1px solid var(--accent); border-radius: 16px; font-weight: 500; font-size: 16px; }
+  .sb:has(.sb__shop) > .lnk .mi { display: inline-block; }
+  .sb h5 { font-size: 16px; line-height: 24px; color: var(--text); font-weight: 500; }
+  .sb__all { display: flex; width: 100%; height: 40px; margin-top: 16px; justify-content: center; }
+  .sb__role { display: block; font-size: 14px; line-height: 20px; color: var(--muted); }
+  .author--s b { font-size: 16px; line-height: 24px; color: var(--text); }
+  .sb .sb__b { margin-top: 16px; font-size: 16px; line-height: 24px; }
+  .sb .sb__cats a, .sb__list a { font-size: 14px; }
+
+  /* статьи — лента с прокруткой */
+  .arts2 { display: flex !important; gap: 16px; margin: 0 -16px; padding: 0 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .arts2::-webkit-scrollbar { display: none; }
+  .arts2 .art { flex: 0 0 240px; height: 240px !important; scroll-snap-align: start; }
+  .crumbs { margin-top: 24px; }
+  .faq--store .qa summary { font-size: 16px; font-weight: 500; }
+}
+@media (max-width: 767px) { body[data-page="store"] .layout { align-items: stretch; } body[data-page="store"] .blk { width: 100%; } }
+.ed > span.ed__btn { display: none; }
+.author .sb__role { display: none; }
+@media (max-width: 767px) {
+  .ed > span.ed__btn { display: flex; margin: 0; grid-column: 1 / -1; width: 100%; height: 40px; border-radius: 16px; background: var(--accent); color: #fcfdff; justify-content: center; align-items: center; }
+  .ed > span.ed__go { display: none; }
+  .author .sb__role { display: block; font-size: 14px; line-height: 20px; color: var(--muted); }
+}
+@media (max-width: 767px) { .arts2 { padding-left: 16px !important; padding-right: 16px !important; scroll-padding-left: 16px; } }
