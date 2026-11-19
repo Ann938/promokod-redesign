@@ -19,6 +19,7 @@
     bolt: '<path d="M13 3 5 13h6l-1 8 8-10h-6z"/>',
     star: '<path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.8l-5.2 2.8 1-5.8-4.3-4.1 5.9-.9Z"/>',
     flame: '<path d="M12 21c-4 0-6.5-2.6-6.5-6 0-3.8 3.3-5.6 4-9 2.2 1.4 3.4 3.3 3.5 5 1-.7 1.6-1.8 1.8-3 2.3 1.8 3.7 4.3 3.7 7 0 3.4-2.5 6-6.5 6Z"/>',
+    spark: '<path d="M12 3c.6 3.6 2.4 5.4 6 6-3.6.6-5.4 2.4-6 6-.6-3.6-2.4-5.4-6-6 3.6-.6 5.4-2.4 6-6Z"/><path d="M19 15c.3 1.6 1 2.3 2.5 2.5-1.5.3-2.2 1-2.5 2.5-.3-1.5-1-2.2-2.5-2.5 1.5-.2 2.2-.9 2.5-2.5Z"/>',
     pct: '<path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/>',
     truck: '<path d="M3 6h11v10H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/>',
     bag: '<path d="M5 8h14l-1 12H6zM9 8V6a3 3 0 0 1 6 0v2"/>',
@@ -69,11 +70,11 @@
   const h2 = (t, link = true) => `<h2 class="h2">${t}${link ? `<a href="#" aria-label="${t}: все">${ic("ext", "ic--s")}</a>` : ""}</h2>`;
 
   /* ---------- купон-карточка (как в блоке «Популярные промокоды») ---------- */
-  const TAGS = { excl: ["Эксклюзивный", "tag"], gift: ["Подарок", "gift"], ship: ["Доставка", "bolt"], sale: ["Акция", "star"] };
+  const TAGS = { excl: ["Эксклюзивный", "tag"], gift: ["Подарок", "gift"], ship: ["Доставка", "bolt"], sale: ["Акция", "star"], cash: ["Кэшбек", "spark"] };
   const cp = (c) => `<article class="cp card lift">
     <div class="cp__top"><span class="cp__logo"><img src="${L(c.l)}" alt="${c.s}"></span><span class="cp__tags">${(c.tags || []).map((t) => t.startsWith("₽") ? `<span class="tag tag--sum">${t.slice(1)}</span>` : `<span class="tag tag--${t}">${ic(TAGS[t][1])}${TAGS[t][0]}</span>`).join("")}</span></div>
     <div class="cp__t">${c.t}</div>
-    <div class="cp__d">${ic("clock", "ic--s")}${c.d || "До 31 июл. 2026"}</div>
+    <div class="cp__d"><i class="mi mi--clock" aria-hidden="true"></i>${c.d || "До 31 июл. 2026"}</div>
     <button class="btn btn--outline" type="button" data-code>${c.btn || "Показать промокод"}</button>
   </article>`;
   const PR = [
@@ -117,60 +118,96 @@
     $("#sform").onsubmit = (e) => { e.preventDefault(); location.href = "store.html"; };
   }
 
-  /* ---------- страница магазина (379:23520 — увеличенная сетка, цветные плашки) ---------- */
+  /* ---------- страница магазина: варианты плашек из секции «купоны» (419:51025) ----------
+     v0 — как на проде (значение текстом), v1 — цветные квадраты, v2 — квадраты с фигурками,
+     v3 — как v1 + «Похожие купоны» каруселью в два ряда. Иконки строки — из макета (img/ic). */
+  const VARS = [["v0", "Как на проде"], ["v1", "Вариант 1"], ["v2", "Вариант 2"], ["v3", "Вариант 3"]];
+  let V = (location.hash.match(/v[0-3]/) || ["v1"])[0];
+  const mi = (n) => `<i class="mi mi--${n}" aria-hidden="true"></i>`;
   const COND = `<div class="cu__more">Промокод действует на весь ассортимент, кроме товаров из раздела «Уценка». Не суммируется с другими акциями. Один промокод — на один заказ.</div>`;
+  const LBL = { cash: "Кэшбек", sale: "Акция", ship: "Доставка", gift: "Подарок" };
+  function square(c) {
+    const set = V === "v2" ? "v2" : "v1";
+    if (c.ty === "logo") return `<span class="sq sq--logo"><img src="${L(c.logo)}" alt=""></span>`;
+    if (c.ty === "val") return `<span class="sq sq--val${V === "v2" ? " sq--deco" : ""}">${c.val}</span>`;
+    return `<img class="sq" src="img/sq/${set}-${c.ty}.svg" alt="${LBL[c.ty]}">`;
+  }
+  function prodValue(c) {
+    if (c.ty === "logo") return `<img src="${L(c.logo)}" alt="">`;
+    if (c.ty === "val") return c.val;
+    if (c.ty === "cash") return "Кешбэк";
+    if (c.ty === "sale") return "Акция";
+    return ic(c.ty === "ship" ? "truck" : "bag");
+  }
   function cu(c) {
     if (c.goods) return goods();
     if (c.best) return best();
-    const v = c.v === "gift" ? ic("bag") : c.v === "truck" ? ic("truck") : c.v === "dmir" ? `<img src="${L("dmir")}" alt="Детский мир">` : c.v;
-    const meta = c.m ? `<span class="msg">${c.m}</span>` : `<span class="when">${ic("clock", "ic--s")}${c.d || "До 30 июн. 2026"}</span>${c.exp ? "" : `<span>${ic("check", "ic--s")}Проверено</span>`}<span>${ic("eye", "ic--s")}${c.seen || 3669} раз</span>`;
+    const v = V === "v0" ? `<div class="cu__v">${prodValue(c)}</div>` : `<div class="cu__v cu__v--sq">${square(c)}</div>`;
+    const meta = c.m ? `<span class="msg">${c.m}</span>`
+      : `<span class="when">${mi("clock")}${c.d || "До 30 июн. 2026"}</span>${c.exp ? "" : `<span>${mi("check")}Проверено</span>`}<span>${mi("eye")}${c.seen || 3669} раз</span>`;
     const btn = c.sub ? `<button class="btn btn--l btn--orange" type="button" data-code>Забрать по подписке</button><span class="cu__sub">Подписка 199 ₽/мес</span>`
-      : `<button class="btn btn--l ${c.act ? "btn--outline" : "btn--primary"}" type="button" data-code>${c.act ? "Открыть акцию " + ic("ext", "ic--s") : "Показать промокод"}</button><button class="cu__cond" type="button" data-cond>Условия ${ic("down")}</button>`;
-    return `<article class="cu card${c.k ? " cu--" + c.k : ""}${c.exp ? " cu--exp" : ""}" data-f="${c.f || "promo"}">${c.b ? `<span class="cu__badge">${c.b}</span>` : ""}<div class="cu__v">${v}</div><div><div class="cu__t">${c.t}</div><div class="cu__m">${meta}</div></div><div class="cu__r">${btn}</div>${c.sub ? "" : COND}</article>`;
+      : `<button class="btn btn--l ${c.act ? "btn--outline" : "btn--primary"}" type="button" data-code>${c.act ? "Открыть акцию" + mi("ext") : "Показать промокод"}</button>${c.act ? "" : `<button class="cu__cond" type="button" data-cond>Условия${mi("chev")}</button>`}`;
+    return `<article class="cu card${c.k ? " cu--" + c.k : ""}${c.exp ? " cu--exp" : ""}" data-f="${c.f || "promo"}">${c.b ? `<span class="cu__badge">${c.b}</span>` : ""}${v}<div><div class="cu__t">${c.t}</div><div class="cu__m">${meta}</div></div><div class="cu__r">${btn}</div>${c.sub || c.act ? "" : COND}</article>`;
   }
   function goods() {
-    const G = [["g1", "Солнечный фонарь из железа", "661 ₽", "2 310 ₽", "-69%", "Выбор редакции", "#7b5cf0"], ["g2", "Робот-пылесос Dreame L40 Ultra CE, 70 Вт", "30 039 ₽", "112 657 ₽", "-72%", "Лучшая цена", "#f08a24"], ["g3", "Смартфон Samsung S23 8/256GB Black", "2 588 ₽", "3 802 ₽", "-10%", "Скоро закончится", "#e0474c"], ["g2", "Робот-пылесос Dreame D10s Plus, станция самоочистки", "24 990 ₽", "39 990 ₽", "-37%", "Лучшая цена", "#f08a24"]];
+    const G = [["g1", "Солнечный фонарь из железа", "661 ₽", "2 170 ₽", "-69%", "Выбор редакции", "#7b5cf0"], ["g2", "Робот-пылесос Dreame L40 Ultra CE, 70 Вт", "30 039 ₽", "112 657 ₽", "-73%", "Лучшая цена", "#f08a24"], ["g3", "Смартфон Samsung S23 8/256GB Black", "2 588 ₽", "3 800 ₽", "-10%", "Скоро закончится!", "#e0474c"], ["g2", "Робот-пылесос Dreame D10s Plus, станция самоочистки", "24 990 ₽", "39 990 ₽", "-37%", "Лучшая цена", "#f08a24"]];
     return `<section class="goods card"><div class="carousel" id="goods"><div class="row">${G.map(([i, t, p, o, d, b, c]) => `<a class="good lift" href="#"><span class="badge" style="background:${c}">${b}</span><span class="good__img"><img src="img/goods/${i}.jpg" alt=""></span><span><b>${t}</b><div class="price">${p}</div><div class="old"><s>${o}</s><em>${d}</em></div></span></a>`).join("")}</div>${arrows}</div><a class="goods__all" href="#">Все товары</a></section>`;
   }
   function best() {
-    const B = [["pop", "star", "Самый популярный", "До <em>-70%</em> на различные товары + бесплатная доставка", "До 31 янв. 2026"], ["best", "pct", "Выгодные условия", "Скидка <em>3000 рублей</em> при первом заказе украшений от 15000 рублей", "До 31 янв. 2026"], ["max", "flame", "Максимальная скидка", "Промокод <em>-10%</em> при любом онлайн-заказе", "До 31 июл. 2026"]];
-    return `<div><h2 class="sec-h" style="margin-top:16px">Лучшие предложения Ситилинк сегодня</h2><div class="best">${B.map(([k, i, n, t, d]) => `<article class="bo card"><span class="tag tag--${k}">${ic(i)}${n}</span><div class="bo__t">${t}</div><div class="cp__d">${ic("clock", "ic--s")}${d}</div><button class="btn btn--primary" type="button" data-code>Показать промокод</button></article>`).join("")}</div></div>`;
+    const B = [["pop", "star", "Самый популярный", "До <em>-70%</em> на различные товары + бесплатная доставка", "До 31 авг. 2026"], ["best", "pct", "Выгодные условия", "Скидка <em>3000 рублей</em> при первом заказе украшений от 15000 рублей", "До 31 июл. 2026"], ["max", "flame", "Максимальная скидка", "Промокод <em>-10%</em> при любом онлайн-заказе", "До 31 июл. 2026"]];
+    return `<div><h2 class="sec-h" style="margin-top:16px">Лучшие предложения Ситилинк сегодня</h2><div class="best">${B.map(([k, i, n, t, d]) => `<article class="bo card"><span class="tag tag--${k}">${ic(i)}${n}</span><div class="bo__t">${t}</div><div class="cp__d">${mi("clock")}${d}</div><button class="btn btn--primary" type="button" data-code>Показать промокод</button></article>`).join("")}</div></div>`;
   }
+  // список купонов — по варианту 1 из макета (427:43509)
   const CU = [
-    { k: "sub", b: "По подписке", v: "1 500 ₽", t: "Скидка <em>1500 рублей</em> для ВСЕХ клиентов при покупке от 15000 рублей", m: "Можно комбинировать с купоном, который применяется автоматически", sub: 1 },
-    { k: "pop", b: "Популярный промокод", v: "Кешбэк", t: "Кешбэк до 25% бонусами на технику и инструменты" },
-    { k: "excl", b: "Эксклюзивный промокод", v: "10000₽", t: "10 000 рублей скидки на заказ от 30 000 рублей!" },
-    { v: "gift", t: "Скидка 5% + кешбэк 5% на первый заказ", f: "repeat" },
+    { k: "sub", b: "По подписке", ty: "val", val: "1 500 ₽", t: "Скидка <em>1500 рублей</em> для ВСЕХ клиентов при покупке от 15000 рублей", m: "Можно комбинировать с купоном, который применяется автоматически", sub: 1 },
+    { k: "pop", b: "Популярный промокод", ty: "cash", t: "Кешбэк 5% при покупке инструментов и техники" },
+    { k: "excl", b: "Эксклюзивный промокод", ty: "logo", logo: "onlinetrade", t: "300 ON-бонусов в подарок по промокоду при регистрации на «Онлайн трейд.ру»" },
+    { ty: "sale", t: "Офисный пакет Р7-Офис и антивирус Касперского за 4789 рублей", f: "sale" },
     { goods: 1 },
-    { v: "dmir", t: "Кешбэк до 25% бонусами на технику и инструменты" },
-    { v: "10000₽", t: "10 000 рублей скидки на заказ от 30 000 рублей!", f: "sale" },
-    { v: "truck", t: "Скидка 5% + кешбэк 5% на первый заказ", f: "ship" },
-    { v: "Кешбэк", t: "Кешбэк 2% за покупку компьютерной техники", seen: 235, act: 1, f: "sale" },
-    { v: "truck", t: "Скидка 5% + кешбэк 5% на первый заказ", f: "ship" },
-    { v: "Кешбэк", t: "Кешбэк 2% за покупку компьютерной техники", seen: 235, act: 1, f: "sale" },
+    { ty: "val", val: "10000₽", t: "10 000 рублей скидки на заказ от 30 000 рублей!" },
+    { ty: "val", val: "-50%", t: "-50% на подписку Яндекс Плюс (6 мес) при покупке со смартфонами и аксессуарами", f: "sale" },
+    { ty: "ship", t: "Бесплатная доставка бытовой техники", f: "ship" },
+    { ty: "gift", t: "При покупке телевизора TCL - кронштейн подарок", seen: 235, act: 1, f: "sale" },
     { best: 1 },
-    { v: "truck", t: "Скидка 5% + кешбэк 5% на первый заказ", f: "ship" },
-    { v: "Кешбэк", t: "Кешбэк 2% за покупку компьютерной техники", seen: 235, act: 1, f: "sale" },
+    { ty: "ship", t: "Бесплатная доставка от 10000 рублей", f: "ship" },
+    { ty: "cash", t: "Кешбэк 2% за покупку компьютерной техники", seen: 235, act: 1, f: "repeat" },
+  ];
+  // похожие купоны (427:43836); в варианте 3 — карусель в два ряда (455:50973)
+  const SIM = [
+    { s: "Пироги №1", l: "pirogi", t: "Скидки до 20% при заказе обуви для горного туризма", tags: ["excl", "gift"] },
+    { s: "Lamoda", l: "lamoda", t: "Промокод -10% при любом онлайн-заказе", tags: ["ship"] },
+    { s: "Арома-Бутик", l: "aroma", t: "Снижение стоимости на 500 рублей при заказе от 10000 рублей", tags: ["₽500 ₽"] },
+    { s: "Иви", l: "ivi2", t: "45 дней бесплатно и -10% к продлению на месяц", tags: ["cash"] },
+    { s: "Lamoda", l: "lamoda", t: "Школьная распродажа со скидками до 40%", tags: ["sale"] },
+    { s: "Спортмастер", l: "sportmaster_b", t: "Выгода до 20% при заказе обуви для горного туризма", tags: ["₽20%"] },
+    { s: "Ситилинк", l: "citilink_sq", t: "Скидка 3000 рублей при первом заказе украшений от 15000 рублей", tags: ["excl", "gift"] },
+    { s: "Арома-Бутик", l: "aroma", t: "Снижение стоимости на 500 рублей при заказе от 10000 рублей", tags: ["₽500 ₽"] },
+    { s: "Спортмастер", l: "sportmaster2", t: "Скидки до 20% при заказе обуви для горного туризма", tags: ["cash"] },
   ];
   function store() {
     const list = $("#list");
-    const draw = (f) => {
-      list.innerHTML = CU.filter((c) => f === "all" || c.goods || c.best || c.f === f || (!c.f && f === "promo")).map(cu).join("");
+    let filter = "all";
+    const draw = () => {
+      document.body.dataset.v = V;
+      list.innerHTML = CU.filter((c) => filter === "all" || c.goods || c.best || (c.f || "promo") === filter).map(cu).join("");
       if ($("#goods")) carousel($("#goods"));
+      $("#expired").innerHTML = [{ ty: "val", val: "-50%", t: "Снижены цены до 50% на технику из подборки", d: "Срок акции истёк", seen: 26371, exp: 1 }, { ty: "val", val: "2 000 ₽", t: "-2000 рублей на технику для дома при приобретении в кредит", d: "Срок акции истёк", seen: 235, exp: 1 }].map(cu).join("");
+      const sim = $("#similar");
+      const cards = SIM.map((c) => cp({ ...c, d: "До 31 июл. 2026" })).join("");
+      if (V === "v3") { sim.className = "carousel sim-car"; sim.innerHTML = `<div class="row">${cards}</div>${arrows}`; carousel(sim); }
+      else { sim.className = "sim"; sim.innerHTML = SIM.slice(0, 6).map((c) => cp({ ...c, d: "До 31 июл. 2026" })).join(""); }
+      $$("#vbar button").forEach((b) => b.classList.toggle("on", b.dataset.v === V));
     };
-    draw("all");
-    $("#filters").addEventListener("click", (e) => { const b = e.target.closest(".f"); if (!b) return; $$(".f").forEach((x) => x.classList.toggle("on", x === b)); draw(b.dataset.f); });
+    // переключатель вариантов внизу
+    const bar = document.createElement("nav");
+    bar.className = "vbar"; bar.id = "vbar"; bar.setAttribute("aria-label", "Варианты плашек");
+    bar.innerHTML = `<span>Плашки купонов:</span>${VARS.map(([k, n]) => `<button type="button" data-v="${k}">${n}</button>`).join("")}`;
+    document.body.appendChild(bar);
+    bar.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; V = b.dataset.v; history.replaceState(null, "", "#" + V); draw(); });
+    addEventListener("hashchange", () => { const m = location.hash.match(/v[0-3]/); if (m) { V = m[0]; draw(); } });
+    draw();
+    $("#filters").addEventListener("click", (e) => { const b = e.target.closest(".f"); if (!b) return; $$(".f").forEach((x) => x.classList.toggle("on", x === b)); filter = b.dataset.f; draw(); });
     document.addEventListener("click", (e) => { const c = e.target.closest("[data-cond]"); if (c) c.closest(".cu").classList.toggle("open"); });
-    $("#expired").innerHTML = [{ v: "-50%", t: "Снижены цены до 50% на технику из подборки", d: "Срок акции истёк", seen: 26371, exp: 1 }, { v: "Кешбэк", t: "Кешбэк 2% за покупку компьютерной техники", d: "Срок акции истёк", seen: 235, exp: 1, act: 1 }].map(cu).join("");
-    const SIM = [
-      { s: "Ситилинк", l: "citilink_sq", t: "Скидка 3000 рублей при первом заказе украшений от 15000 рублей", tags: [], d: "До 31 янв. 2026", icon: "bag" },
-      { s: "AliExpress", l: "ali", t: "До -70% на различные товары + бесплатная доставка", tags: [], d: "До 31 янв. 2026", icon: "bag" },
-      { s: "Lamoda", l: "lamoda", t: "Промокод -10% при любом онлайн-заказе", tags: [], d: "До 31 янв. 2026", icon: "truck" },
-      { s: "Sunlight", l: "aroma", t: "Снижение стоимости на 500 рублей при заказе от 10000 рублей", tags: ["₽500 ₽"], d: "Пикабокс · 199 ₽ в месяц", btn: "Забрать по подписке" },
-      { s: "Пироги №1", l: "pirogi", t: "Скидка 10% на первый заказ", tags: ["₽-10%"], d: "До 31 дек. 2026" },
-      { s: "Спортмастер", l: "sportmaster2", t: "Скидки до 20% при заказе обуви для горного туризма", tags: ["₽-20%"], d: "До 31 дек. 2026" },
-    ];
-    $("#similar").innerHTML = SIM.map((c) => cp(c).replace('<span class="cp__tags">', `<span class="cp__tags">${c.icon ? `<span class="tag" style="background:#f2f3f7;color:var(--accent)">${ic(c.icon)}</span>` : ""}`)).join("");
     const PS = [["ymarket", "Яндекс маркет", 37], ["vprok", "Банк Открытие (Росгосстрах Банк)", 12], ["sber", "Sunlight", 1], ["foxford", "Фоксфорд", 101], ["eldorado", "Эльдорадо", 82], ["biggeek", "Биг Гик", 46], ["lamoda", "Ламода", 46], ["ali", "Алиэкспресс", 78], ["aroma", "Арома-Бутик", 63], ["chitai", "Читай город", 41]];
     $("#ps").innerHTML = PS.map(([l, n, k]) => `<a href="#"><img src="${L(l)}" alt=""><span>${n}<small>${kup(k)}</small></span></a>`).join("");
     const SC = ["Авто", "Аптеки и здоровье", "Банки и страхование", "Гипермаркеты", "Детские товары", "Доставка еды", "Кино и концерты", "Книги", "Косметика и парфюмерия", "Маркетплейсы", "Образование", "Одежда и обувь", "Офис и работа", "Прочее", "Путешествия и билеты", "Развлечения", "Спорт", "Стройка", "Товары для взрослых (18+)", "Товары для дома", "Товары для животных", "Украшения", "Услуги и сервисы", "Фильмы и музыка", "Хостинг, интернет", "Цветы и подарки", "Часы и аксессуары", "Электроника и компьютеры"];

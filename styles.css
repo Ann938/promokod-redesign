@@ -339,3 +339,48 @@ main { padding-bottom: 64px; }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; scroll-behavior: auto !important; } }
 .brand--full { padding: 0; overflow: hidden; }
 .brand--full img { width: 100%; height: 100%; max-height: none; object-fit: cover; }
+
+/* ===== иконки из макета (маской, цвет — currentColor) ===== */
+.mi { display: inline-block; width: 16px; height: 16px; flex: none; background: currentColor; -webkit-mask: var(--m) center / contain no-repeat; mask: var(--m) center / contain no-repeat; }
+.mi--clock { --m: url(img/ic/clock.svg); -webkit-mask-size: 13.6px; mask-size: 13.6px; }
+.mi--check { --m: url(img/ic/check.svg); -webkit-mask-size: 13.6px; mask-size: 13.6px; }
+.mi--eye { --m: url(img/ic/eye.svg); -webkit-mask-size: 13.4px; mask-size: 13.4px; }
+.mi--ext { --m: url(img/ic/ext.svg); -webkit-mask-size: 12.8px; mask-size: 12.8px; margin-left: 2px; }
+.mi--chev { --m: url(img/ic/chev.svg); width: 24px; height: 24px; -webkit-mask-size: 11.2px; mask-size: 11.2px; transition: transform .2s; }
+.cu__m { color: var(--muted); }
+.cu__m span { gap: 4px; }
+.cu__cond { gap: 0; }
+.cu.open .cu__cond .mi--chev { transform: rotate(180deg); }
+.cu__t { font-weight: 400; }
+.cu--sub .cu__t, .cu--pop .cu__t, .cu--excl .cu__t { font-weight: 400; }
+.cp__d .mi { color: var(--muted); }
+/* ===== квадраты значений (варианты 1–3) ===== */
+.cu__v--sq { width: 72px; justify-self: start; }
+.cu { grid-template-columns: 96px minmax(0, 1fr) auto; }
+body[data-v="v1"] .cu, body[data-v="v2"] .cu, body[data-v="v3"] .cu { grid-template-columns: 72px minmax(0, 1fr) auto; padding-left: 24px; }
+.sq { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 8px; }
+img.sq { display: block; }
+.sq--logo { background: #f7f8fc; overflow: hidden; }
+.sq--logo img { max-width: 64px; max-height: 64px; object-fit: contain; }
+.sq--val { background: #e8fff7; color: var(--accent); font-size: 16px; line-height: 24px; font-weight: 400; white-space: nowrap; }
+.sq--deco { background: #e8fff7 url(img/sq/v2-val.svg) center / 72px 72px no-repeat; }
+.cu--exp .sq--val { opacity: .6; }
+/* похожие купоны каруселью в два ряда (вариант 3) */
+.sim-car .row { display: grid !important; grid-auto-flow: column; grid-template-rows: repeat(2, auto); grid-auto-columns: calc((100% - 32px) / 3); gap: 16px; }
+.sim-car .cp { width: auto; }
+/* переключатель вариантов внизу */
+.vbar { position: fixed; left: 50%; bottom: 16px; z-index: 80; transform: translateX(-50%); display: flex; align-items: center; gap: 4px; padding: 6px 6px 6px 14px; border-radius: 18px; background: #292a2e; color: #fcfdff; box-shadow: 0 10px 30px rgba(0, 0, 0, .25); font-size: 14px; white-space: nowrap; }
+.vbar span { opacity: .7; margin-right: 6px; }
+.vbar button { height: 36px; padding: 0 14px; border-radius: 12px; color: #fcfdff; font-size: 14px; transition: background-color .15s; }
+.vbar button:hover { background: rgba(255, 255, 255, .12); }
+.vbar button.on { background: var(--accent); }
+body[data-page="store"] { padding-bottom: 72px; }
+@media (max-width: 767px) {
+  .vbar { left: 8px; right: 8px; transform: none; overflow-x: auto; scrollbar-width: none; padding-left: 6px; }
+  .vbar span { display: none; }
+  body[data-v] .cu { grid-template-columns: 72px minmax(0, 1fr) !important; padding-left: 16px; }
+  .sim-car .row { grid-auto-columns: 82%; }
+}
+.cu__v img.sq { max-width: none; max-height: none; width: 72px; height: 72px; margin: 0; }
+.tag--cash { background: #fff3eb; color: #f28f49; }
+@media (max-width: 767px) { .vbar { justify-content: space-between; } .vbar button { padding: 0 8px; font-size: 13px; height: 34px; } }
