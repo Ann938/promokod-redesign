@@ -623,3 +623,12 @@ body[data-page="home"] .qa summary { padding: 0; font-weight: 600; font-size: 16
 body[data-page="home"] .qa p { padding: 16px 0 0; font-size: 16px; line-height: 24px; color: #45474d; }
 .h2 { font-size: 24px; line-height: 32px; }
 @media (max-width: 767px) { .search-row__cookie--top { display: none; } }
+/* карусели: карточки ровно по ширине контента (100…1340), стрелки симметрично с обеих сторон */
+.carousel .row { margin-left: 0; margin-right: 0; padding-left: 0; padding-right: 0; }
+/* от шапки до первого блока главной — больше воздуха */
+body[data-page="home"] .top { padding-top: 24px; }
+/* листалки строго по макету (471:51366/471:51367): 40px, на 20px за краем блока слева и справа, по центру карточек */
+.carousel:not(.slider) > .arr--l { left: -20px; }
+.carousel:not(.slider) > .arr--r { right: -20px; }
+.carousel:not(.slider) > .arr { top: calc(50% - 4px); }
+#ishops > .arr { top: calc(50% - 16px); }
