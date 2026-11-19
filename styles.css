@@ -1,3 +1,9 @@
+/* Lato со всеми начертаниями макета: Regular 400, Medium 500, SemiBold 600, Bold 700, Black 900 */
+@font-face { font-family: "Lato DS"; font-weight: 400; font-style: normal; font-display: swap; src: url(https://cdn.jsdelivr.net/npm/lato-font@3.0.0/fonts/lato-normal/lato-normal.woff2) format("woff2"); }
+@font-face { font-family: "Lato DS"; font-weight: 500; font-style: normal; font-display: swap; src: url(https://cdn.jsdelivr.net/npm/lato-font@3.0.0/fonts/lato-medium/lato-medium.woff2) format("woff2"); }
+@font-face { font-family: "Lato DS"; font-weight: 600; font-style: normal; font-display: swap; src: url(https://cdn.jsdelivr.net/npm/lato-font@3.0.0/fonts/lato-semibold/lato-semibold.woff2) format("woff2"); }
+@font-face { font-family: "Lato DS"; font-weight: 700; font-style: normal; font-display: swap; src: url(https://cdn.jsdelivr.net/npm/lato-font@3.0.0/fonts/lato-bold/lato-bold.woff2) format("woff2"); }
+@font-face { font-family: "Lato DS"; font-weight: 900; font-style: normal; font-display: swap; src: url(https://cdn.jsdelivr.net/npm/lato-font@3.0.0/fonts/lato-black/lato-black.woff2) format("woff2"); }
 /* Пикабу Промокоды — вёрстка по макетам «Изменение сетки» (сетка 1240). Токены из ДС макета. */
 :root {
   --bg: #f2f3f7;
@@ -17,7 +23,7 @@
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { -webkit-text-size-adjust: 100%; }
-body { font-family: "Lato", system-ui, sans-serif; font-size: 16px; line-height: 24px; color: var(--text); background: var(--bg); -webkit-font-smoothing: antialiased; }
+body { font-family: "Lato DS", "Lato", system-ui, sans-serif; font-size: 16px; line-height: 24px; color: var(--text); background: var(--bg); -webkit-font-smoothing: antialiased; }
 a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 input { font: inherit; color: inherit; }
@@ -391,3 +397,23 @@ body[data-v="v0"] .cu { grid-template-columns: 72px minmax(0, 1fr) auto; padding
 .cu__v--prod.is-logo { background: #fcfdff; }
 .cu__v--prod img { max-width: 64px; max-height: 64px; }
 @media (max-width: 767px) { .cu__v--prod { font-size: 15px; } }
+
+/* ===== начертания по макету ===== */
+.btn, .nav__a, .save { font-weight: 500; }
+.cu__t { font-weight: 600 !important; }
+.sq--val { font-weight: 700; }
+.cu__v--prod { font-weight: 700; }
+.good b { font-weight: 600; }
+.good .price { font-weight: 600; }
+.good .old em { font-weight: 500; color: #e5594c; }
+.h2, .sec-h, .store-h1, .top h1 { font-weight: 700; }
+/* ===== товары как в макете: отдельные карточки 296×154 на фоне страницы ===== */
+.goods { padding: 0; background: none; box-shadow: none; border-radius: 0; }
+.goods .carousel .row { padding: 10px 4px 12px; }
+.good { width: calc((100% - 32px) / 3); background: var(--card); border-radius: 16px; box-shadow: var(--shadow); padding: 16px; grid-template-columns: 104px minmax(0, 1fr); gap: 16px; min-height: 154px; }
+.good__img { width: 104px; height: 104px; border-radius: 8px; }
+.good .badge { left: 16px; top: -10px; border-radius: 8px 8px 8px 0; }
+.good b { -webkit-line-clamp: 3; }
+.good .price { margin-top: 12px; font-size: 18px; }
+.goods__all { margin-top: 12px; font-size: 16px; }
+@media (max-width: 767px) { .good { width: 86%; } }

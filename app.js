@@ -121,8 +121,8 @@
   /* ---------- страница магазина: варианты плашек из секции «купоны» (419:51025) ----------
      v0 — как на проде (значение текстом), v1 — цветные квадраты, v2 — квадраты с фигурками,
      v3 — как v1 + «Похожие купоны» каруселью в два ряда. Иконки строки — из макета (img/ic). */
-  const VARS = [["v0", "Как на проде"], ["v1", "Вариант 1"], ["v2", "Вариант 2"], ["v3", "Вариант 3"]];
-  let V = (location.hash.match(/v[0-3]/) || ["v1"])[0];
+  const VARS = [["v0", "Как на проде"], ["v1", "Вариант 1"], ["v2", "Вариант 2"]];
+  let V = (location.hash.match(/v[0-2]/) || ["v1"])[0];
   const mi = (n) => `<i class="mi mi--${n}" aria-hidden="true"></i>`;
   const COND = `<div class="cu__more">Промокод действует на весь ассортимент, кроме товаров из раздела «Уценка». Не суммируется с другими акциями. Один промокод — на один заказ.</div>`;
   const LBL = { cash: "Кэшбек", sale: "Акция", ship: "Доставка", gift: "Подарок" };
@@ -204,7 +204,7 @@
     bar.innerHTML = `<span>Плашки купонов:</span>${VARS.map(([k, n]) => `<button type="button" data-v="${k}">${n}</button>`).join("")}`;
     document.body.appendChild(bar);
     bar.addEventListener("click", (e) => { const b = e.target.closest("button"); if (!b) return; V = b.dataset.v; history.replaceState(null, "", "#" + V); draw(); });
-    addEventListener("hashchange", () => { const m = location.hash.match(/v[0-3]/); if (m) { V = m[0]; draw(); } });
+    addEventListener("hashchange", () => { const m = location.hash.match(/v[0-2]/); if (m) { V = m[0]; draw(); } });
     draw();
     $("#filters").addEventListener("click", (e) => { const b = e.target.closest(".f"); if (!b) return; $$(".f").forEach((x) => x.classList.toggle("on", x === b)); filter = b.dataset.f; draw(); });
     document.addEventListener("click", (e) => { const c = e.target.closest("[data-cond]"); if (c) c.closest(".cu").classList.toggle("open"); });
