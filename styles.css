@@ -541,3 +541,37 @@ body[data-page="store"] .cu--sub .cu__badge { top: -1px; left: 23px; }
 /* бейдж товара: 16px от края, наполовину над карточкой, скругление со всех сторон */
 .good .badge { left: 16px; top: -10px; height: 20px; padding: 2px 8px; border-radius: 8px; line-height: 16px; }
 @media (max-width: 767px) { .cu__badge { left: 16px; } body[data-page="store"] .cu { padding-top: 28px; padding-bottom: 16px; } }
+
+/* ===== шапка: меню строго по центру, поиск и вход справа ===== */
+.hd__in { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.nav { margin: 0; gap: 8px; justify-self: center; }
+.nav__a { height: 40px; padding: 0 8px; border-radius: 12px; }
+.nav__a:hover { background: #fcfdff; }
+.save { margin-left: 4px; }
+.hd__r { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+.hd__search { margin-left: 0; width: 242px; }
+.hd .btn--primary { margin-left: 0; }
+/* ===== листалки как в макете: скруглённый квадрат 40px, #f7f8fc, серая стрелка ===== */
+.arr { width: 40px; height: 40px; margin-top: -20px; border-radius: 16px; background: #f7f8fc; box-shadow: 0 4px 16px rgba(41, 42, 46, .08), 0 0 1px rgba(41, 42, 46, .12); color: #757880; }
+.arr:hover { color: var(--accent); background: #fcfdff; }
+.arr__i { width: 24px; height: 24px; fill: currentColor; }
+.arr[disabled] { opacity: 1; pointer-events: none; color: #c8cad1; }
+.slider .arr { width: 32px; height: 32px; margin-top: -16px; }
+.slider .arr--l { left: -16px; }
+.slider .arr--r { right: -16px; }
+.slider .arr { top: calc(50% - 12px); }
+#ishops .arr { top: calc(50% - 12px); }
+/* ссылка у заголовка блока: кнопка 32px, иконка из макета */
+.h2 a { width: 32px; height: 32px; border-radius: 8px; color: #757880; }
+.ext__i { width: 32px; height: 32px; fill: currentColor; }
+/* ===== бейджи в карточках как в макете: 24px, отступы 12, скругление 16, Medium 14, залитая иконка 16 ===== */
+.tag { height: 24px; padding: 0 12px; gap: 4px; border-radius: 16px; border: 1px solid transparent; font-size: 14px; line-height: 20px; font-weight: 500; }
+.tag .fi { width: 16px; height: 16px; fill: currentColor; flex: none; }
+.cp__tags { gap: 4px; }
+.tag--excl { background: #f9fff5; border-color: #eaffd9; color: #6fa642; }
+.tag--gift { background: #fbf7ff; border-color: #f6edff; color: #945ccc; }
+.tag--ship { background: #edf7ff; border-color: #d4edff; color: #4795cc; }
+.tag--sum { background: #e8fff7; border-color: #b2ffe4; color: #3d9979; }
+.tag--sale { background: #fff3f2; border-color: #ffe1de; color: #f26d61; }
+.tag--cash { background: #fff3eb; border-color: #ffe2cf; color: #f28f49; }
+@media (max-width: 1023px) { .hd__in { display: flex; } .hd__r { margin-left: auto; } }

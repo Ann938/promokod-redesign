@@ -42,8 +42,8 @@
         <a class="nav__a" href="#">Блог</a>
         <a class="save" href="#">Сэкономь ещё<img src="img/cookie.svg" alt=""></a>
       </nav>
-      <label class="hd__search"><input type="search" placeholder="Магазины" aria-label="Поиск магазина">${ic("search")}</label>
-      <a class="btn btn--primary" href="#">Вход</a>
+      <div class="hd__r"><label class="hd__search"><input type="search" placeholder="Магазины" aria-label="Поиск магазина">${ic("search")}</label>
+      <a class="btn btn--primary" href="#">Вход</a></div>
     </div>`;
     $("#ft").innerHTML = `<div class="wrap ft__in">
       <a class="logo" href="index.html"><img src="img/logo-icon.svg" alt=""><img src="img/logo-text.svg" alt="Пикабу Промокоды"></a>
@@ -66,13 +66,24 @@
     row.addEventListener("scroll", upd, { passive: true }); addEventListener("resize", upd); upd();
     return row;
   }
-  const arrows = `<button class="arr arr--l" type="button" aria-label="Назад">${ic("left")}</button><button class="arr arr--r" type="button" aria-label="Вперёд">${ic("right")}</button>`;
-  const h2 = (t, link = true) => `<h2 class="h2">${t}${link ? `<a href="#" aria-label="${t}: все">${ic("ext", "ic--s")}</a>` : ""}</h2>`;
+  let arrows; const mkArrows = () => `<button class="arr arr--l" type="button" aria-label="Назад">${ARR("l")}</button><button class="arr arr--r" type="button" aria-label="Вперёд">${ARR("r")}</button>`;
+  const h2 = (t, link = true) => `<h2 class="h2">${t}${link ? `<a href="#" aria-label="${t}: все">${EXT}</a>` : ""}</h2>`;
 
   /* ---------- купон-карточка (как в блоке «Популярные промокоды») ---------- */
+  const FI = {
+    excl: '<path fill-rule="evenodd" d="M2.5 3.6c0-.6.5-1.1 1.1-1.1h5.1c.3 0 .6.1.8.3l5 5c.4.4.4 1.1 0 1.6l-5.1 5.1c-.4.4-1.1.4-1.6 0l-5-5a1.1 1.1 0 0 1-.3-.8V3.6Zm3.3 3.6a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6Z"/>',
+    gift: '<path d="M2 6.2c0-.4.3-.7.7-.7h10.6c.4 0 .7.3.7.7v1.6c0 .4-.3.7-.7.7H2.7a.7.7 0 0 1-.7-.7V6.2ZM3 9.5h4.3V14H3.8a.8.8 0 0 1-.8-.8V9.5Zm5.7 0H13v3.7c0 .5-.4.8-.8.8H8.7V9.5ZM7.3 5.5H5.6C4.4 5.5 3.6 4.8 3.6 3.9c0-.9.7-1.6 1.6-1.6 1 0 1.6.6 2.1 1.6v1.6Zm1.4 0V3.9c.5-1 1.1-1.6 2.1-1.6.9 0 1.6.7 1.6 1.6 0 .9-.8 1.6-2 1.6H8.7Z"/>',
+    ship: '<path d="M9.1 1.5 3 9h4.4l-.9 5.5L12.7 7H8.3l.8-5.5Z"/>',
+    sale: '<path d="m8 1.6 1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.4l-3.8 2 .7-4.3-3.1-3 4.3-.6L8 1.6Z"/>',
+    cash: '<path d="M6.5 2.5c.4 2.6 1.4 3.6 4 4-2.6.4-3.6 1.4-4 4-.4-2.6-1.4-3.6-4-4 2.6-.4 3.6-1.4 4-4ZM12 9c.2 1.4.8 2 2.2 2.2-1.4.2-2 .8-2.2 2.2-.2-1.4-.8-2-2.2-2.2C11.2 11 11.8 10.4 12 9ZM11.5 1.5c.2 1 .6 1.4 1.5 1.5-.9.2-1.3.6-1.5 1.5-.1-.9-.5-1.3-1.5-1.5 1-.1 1.4-.5 1.5-1.5Z"/>',
+  };
+  const fi = (n) => `<svg class="fi" viewBox="0 0 16 16" aria-hidden="true">${FI[n] || ""}</svg>`;
+  const ARR = (dir) => `<svg class="arr__i" viewBox="0 0 24 24" aria-hidden="true"${dir === "r" ? ' style="transform:scaleX(-1)"' : ""}><path d="M7.335 12.772l5.886 5.918a1.04 1.04 0 0 0 1.477 0 1.06 1.06 0 0 0 0-1.477L9.55 11.976l5.148-5.185a1.06 1.06 0 0 0 0-1.477 1.03 1.03 0 0 0-1.477 0L7.335 11.232a1.05 1.05 0 0 0 0 1.54Z"/></svg>`;
+  const EXT = '<svg class="ext__i" viewBox="0 0 32 32" aria-hidden="true"><path d="M15.97 24h-5.54C9.05 24 8 22.94 8 21.55V10.43C8 9.06 9.05 8 10.4 8h4.15c.33 0 .58.14.73.43.15.29.12.57-.06.83-.17.23-.4.33-.69.33h-3.99c-.1 0-.2 0-.29.02-.38.07-.63.36-.66.74v11.12c0 .63.3.94.93.94h10.93c.61 0 .92-.31.92-.93v-4.06c0-.37.21-.66.55-.77.32-.11.69 0 .88.29.09.14.15.32.15.49.01 1.41.02 2.83 0 4.24-.01 1.28-1.09 2.33-2.37 2.33h-5.6Z"/><path d="M21.27 9.59h-2.45c-.13 0-.26 0-.38-.04a.79.79 0 0 1-.53-.85c.06-.41.36-.69.77-.69h4.44c.54 0 .88.33.88.87v4.38c0 .51-.34.86-.81.86-.46 0-.78-.36-.78-.86v-2.52c-.09.08-.14.13-.2.18l-5.1 5.11c-.2.21-.44.35-.74.3a.77.77 0 0 1-.64-1.34l.34-.35 4.85-4.86.35-.19Z"/></svg>';
+  arrows = mkArrows();
   const TAGS = { excl: ["Эксклюзивный", "tag"], gift: ["Подарок", "gift"], ship: ["Доставка", "bolt"], sale: ["Акция", "star"], cash: ["Кэшбек", "spark"] };
   const cp = (c) => `<article class="cp card lift">
-    <div class="cp__top"><span class="cp__logo"><img src="${L(c.l)}" alt="${c.s}"></span><span class="cp__tags">${(c.tags || []).map((t) => t.startsWith("₽") ? `<span class="tag tag--sum">${t.slice(1)}</span>` : `<span class="tag tag--${t}">${ic(TAGS[t][1])}${TAGS[t][0]}</span>`).join("")}</span></div>
+    <div class="cp__top"><span class="cp__logo"><img src="${L(c.l)}" alt="${c.s}"></span><span class="cp__tags">${(c.tags || []).map((t) => t.startsWith("₽") ? `<span class="tag tag--sum">${t.slice(1)}</span>` : `<span class="tag tag--${t}">${fi(t)}${TAGS[t][0]}</span>`).join("")}</span></div>
     <div class="cp__t">${c.t}</div>
     <div class="cp__d"><i class="mi mi--clock" aria-hidden="true"></i>${c.d || "До 31 июл. 2026"}</div>
     <button class="btn btn--outline" type="button" data-code>${c.btn || "Показать промокод"}</button>
