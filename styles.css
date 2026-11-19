@@ -593,3 +593,11 @@ body[data-page="home"] .brand--citi { border-color: transparent; }
 /* внутренние поля карточек 24px, как в макете — стрелка листалки (до 20px внутрь) не наезжает на текст */
 .cp { padding: 24px; }
 .ishop { padding: 16px 24px; }
+/* ===== логотипы магазинов: везде квадрат со скруглением 8px, как в макете ===== */
+.pstore__img, .cp__logo, .ishop__img, .sq--logo { width: 72px; height: 72px; border-radius: 8px; overflow: hidden; background: #fcfdff; flex: none; display: grid; place-items: center; }
+.pstore__img img, .cp__logo img, .ishop__img img, .sq--logo img { width: 100%; height: 100%; max-width: none; max-height: none; object-fit: contain; border-radius: 0; }
+.sb__shop img, .sb__list--shops img { border-radius: 8px; overflow: hidden; object-fit: contain; background: #fcfdff; }
+.modal__logo img { border-radius: 8px; }
+@media (max-width: 767px) { .ishop__img { width: 64px; height: 64px; } }
+/* Ситилинк в плитке — оранжевый квадрат целиком, как в макете */
+.pstore__img:has(img[src$="logo/citilink.jpg"]) { background: #fc6a1b; }
